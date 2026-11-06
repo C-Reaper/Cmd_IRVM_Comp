@@ -1,0 +1,114 @@
+define i64 i64 i64 @f.Human.new i64
+    allocs 24 %h 
+    add ptr %0 %h 0 
+    add ptr %1 %0 0 
+    store i64 %1 1 
+    add ptr %2 %h 0 
+    add ptr %3 %2 8 
+    store i64 %3 2 
+    add ptr %4 %h 16 
+    store i64 %4 &3 
+    ass ptr %5 %h 
+    add i64 %6 %5 0 
+    load i64 %7 %6 
+    add i64 %8 %5 8 
+    load i64 %9 %8 
+    add i64 %10 %5 16 
+    load i64 %11 %10 
+    destroy %h 
+    ret %7 %9 %11 
+    destroy %h 
+    ret 
+
+define i64 i64 i64 @f.Human.add i64 i64 i64
+    allocs 24 %set 
+    add ptr %0 %set 0 
+    add ptr %1 %0 0 
+    store i64 %1 &3 
+    add ptr %4 %set 0 
+    add ptr %5 %4 8 
+    store i64 %5 &4 
+    add ptr %8 %set 16 
+    store i64 %8 &5 
+    ass ptr %10 %set 
+    add i64 %11 %10 0 
+    load i64 %12 %11 
+    add i64 %13 %10 8 
+    load i64 %14 %13 
+    add i64 %15 %10 16 
+    load i64 %16 %15 
+    destroy %set 
+    ret %12 %14 %16 
+    destroy %set 
+    ret 
+
+define i64 i64 i64 @f.Human.sub i64 i64 i64
+    ass i64 %0 &3 
+    ass i64 %1 &4 
+    ass i64 %2 &5 
+    ret %0 %1 %2 
+    ret 
+
+global i64 @f.main i64 i64
+    allocs 24 %h_a 
+    ass i64 %3 &1 
+    call @f.Human.new %0 %1 %2 %3 
+    ass ptr %4 %h_a 
+    add i64 %5 %4 0 
+    store i64 %5 %0 
+    add i64 %6 %4 8 
+    store i64 %6 %1 
+    add i64 %7 %4 16 
+    store i64 %7 %2 
+    allocs 24 %h_b 
+    ass ptr %14 %h_a 
+    add i64 %15 %14 0 
+    load i64 %11 %15 
+    add i64 %16 %14 8 
+    load i64 %12 %16 
+    add i64 %17 %14 16 
+    load i64 %13 %17 
+    call @f.Human.add %8 %9 %10 %11 %12 %13 
+    ass ptr %18 %h_b 
+    add i64 %19 %18 0 
+    store i64 %19 %8 
+    add i64 %20 %18 8 
+    store i64 %20 %9 
+    add i64 %21 %18 16 
+    store i64 %21 %10 
+    alloca i64 %result 
+    add ptr %22 %h_a 0 
+    add ptr %23 %22 0 
+    add ptr %24 %h_a 0 
+    add ptr %25 %24 8 
+    load i64 %26 %23 
+    load i64 %27 %25 
+    add i64 %28 %26 %27 
+    add ptr %29 %h_a 16 
+    load i64 %30 %29 
+    add i64 %31 %28 %30 
+    add ptr %32 %h_b 0 
+    add ptr %33 %32 0 
+    add ptr %34 %h_b 0 
+    add ptr %35 %34 8 
+    load i64 %36 %33 
+    load i64 %37 %35 
+    add i64 %38 %36 %37 
+    add ptr %39 %h_b 16 
+    load i64 %40 %39 
+    add i64 %41 %38 %40 
+    add i64 %42 %31 %41 
+    store i64 %result %42 
+    add i64 %43 &1 &2 
+    load i64 %44 %result 
+    add i64 %45 %43 %44 
+    ass i64 %46 %45 
+    destroy %result 
+    destroy %h_b 
+    destroy %h_a 
+    ret %46 
+    destroy %result 
+    destroy %h_b 
+    destroy %h_a 
+    ret 
+

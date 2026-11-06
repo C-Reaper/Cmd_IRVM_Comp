@@ -1,0 +1,254 @@
+register:
+  gpr:
+    A:
+      i8: al
+      i16: ax
+      i32: eax
+      i64: rax
+      u8: al
+      u16: ax
+      u32: eax
+      u64: rax
+    B:
+      i8: bl
+      i16: bx
+      i32: ebx
+      i64: rbx
+      u8: bl
+      u16: bx
+      u32: ebx
+      u64: rbx
+    C:
+      i8: bl
+      i16: bx
+      i32: ebx
+      i64: rbx
+      u8: bl
+      u16: bx
+      u32: ebx
+      u64: rbx
+    D:
+      i8: dl
+      i16: dx
+      i32: edx
+      i64: rdx
+      u8: dl
+      u16: dx
+      u32: edx
+      u64: rdx
+
+    S:
+      i8: sil
+      i16: si
+      i32: esi
+      i64: rsi
+      u8: sil
+      u16: si
+      u32: esi
+      u64: rsi
+    I:
+      i8: dil
+      i16: di
+      i32: edi
+      i64: rdi
+      u8: dil
+      u16: di
+      u32: edi
+      u64: rdi
+
+    SP:
+      i16: sp
+      i32: esp
+      i64: rsp
+      u16: sp
+      u32: esp
+      u64: rsp
+    BP:
+      i16: bp
+      i32: ebp
+      i64: rbp
+      u16: bp
+      u32: ebp
+      u64: rbp
+
+    R8:
+      i8: r8b
+      i16: r8w
+      i32: r8d
+      i64: r8
+      u8: r8b
+      u16: r8w
+      u32: r8d
+      u64: r8
+    R9:
+      i8: r9b
+      i16: r9w
+      i32: r9d
+      i64: r9
+      u8: r9b
+      u16: r9w
+      u32: r9d
+      u64: r9
+    R10:
+      i8: r10b
+      i16: r10w
+      i32: r10d
+      i64: r10
+      u8: r10b
+      u16: r10w
+      u32: r10d
+      u64: r10
+    R11:
+      i8: r11b
+      i16: r11w
+      i32: r11d
+      i64: r11
+      u8: r11b
+      u16: r11w
+      u32: r11d
+      u64: r11
+    R12:
+      i8: r12b
+      i16: r12w
+      i32: r12d
+      i64: r12
+      u8: r12b
+      u16: r12w
+      u32: r12d
+      u64: r12
+    R13:
+      i8: r13b
+      i16: r13w
+      i32: r13d
+      i64: r13
+      u8: r13b
+      u16: r13w
+      u32: r13d
+      u64: r13
+    R14:
+      i8: r14b
+      i16: r14w
+      i32: r14d
+      i64: r14
+      u8: r14b
+      u16: r14w
+      u32: r14d
+      u64: r14
+    R15:
+      i8: r15b
+      i16: r15w
+      i32: r15d
+      i64: r15
+      u8: r15b
+      u16: r15w
+      u32: r15d
+      u64: r15
+  
+  inst:
+    i16: ip
+    i32: eip
+    i64: rip
+    u16: ip
+    u32: eip
+    u64: rip
+    
+  seg:
+    CS:
+      i16: CS
+      u16: CS
+    DS:
+      i16: DS
+      u16: DS
+    ES:
+      i16: ES
+      u16: ES
+    FS:
+      i16: FS
+      u16: FS
+    GS:
+      i16: GS
+      u16: GS
+    SS:
+      i16: SS
+      u16: SS
+
+  system:
+    cr:
+      count: 9
+      i64: cr
+      u64: cr
+    dr:
+      count: 8
+      i64: dr
+      u64: dr
+    GDTR:
+      i64: GDTR
+      u64: GDTR
+    IDTR:
+      i64: IDTR
+      u64: IDTR
+    LDTR:
+      i64: LDTR
+      u64: LDTR
+    TR:
+      i64: TR
+      u64: TR
+    MSRs:
+      i64: MSRs
+      u64: MSRs
+    MXCSR:
+      i64: MXCSR
+      u64: MXCSR
+
+  simd:
+    mm:
+      count: 16
+      i128: xmm
+      i256: ymm
+      i512: zmm
+      u128: xmm
+      u256: ymm
+      u512: zmm
+    mask:
+      count: 8
+      i64: K
+      u64: K
+    
+  fpu:
+    st:
+      count: 8
+      i80: st
+      u80: st
+
+instructions:
+  operand_pairs:
+    - operand0: reg
+      operand1: reg
+    - operand0: reg
+      operand1: mem
+    - operand0: mem
+      operand1: reg
+    - operand0: reg
+      operand1: imm
+    - operand0: mem
+      operand1: imm
+  opcodes:
+    - add: add
+    - sub: sub
+    - mul: mul
+    - div: div
+    - imul: imul
+    - idiv: idiv
+    - neg: neg
+    - inc: inc
+    - dec: dec
+    - not: not
+    - and: and
+    - or: or
+    - xor: xor
+    - shl: shl
+    - shr: shr
+    - call: call
+    - ret: ret
+    - jmp: jmp
+    - brc: je
