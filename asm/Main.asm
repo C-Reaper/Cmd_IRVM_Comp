@@ -15,164 +15,23 @@ section .bss
 
 section .text
 
-f.Human.new:
+f.fn_add:
     push rbp 
     mov rbp , rsp 
-    lea 
-    add 
-    mov 
-    add 
-    mov 
-    lea 
-    add 
-    mov 
-    add 
-    mov 
-    lea 
-    add 
-    mov 
-    lea 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    pop rbp 
-    ret 
-    pop rbp 
-    ret 
-
-f.Human.add:
-    push rbp 
-    mov rbp , rsp 
-    lea 
-    add 
-    mov 
-    add 
-    mov 
-    lea 
-    add 
-    mov 
-    add 
-    mov 
-    lea 
-    add 
-    mov 
-    lea 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    pop rbp 
-    ret 
-    pop rbp 
-    ret 
-
-f.Human.sub:
-    push rbp 
-    mov rbp , rsp 
-    mov 
-    mov 
-    mov 
-    pop rbp 
-    ret 
+    mov r15 , rsi 
+    add r15 , rdi 
+    mov rbx , r15 
     pop rbp 
     ret 
 
 f.main:
     push rbp 
     mov rbp , rsp 
-    mov 
-    add rsp , 2509365002 
-    call f.Human.new 
-    sub rsp , 2509365002 
-    lea 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    lea 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    add rsp , 2509365026 
-    call f.Human.add 
-    sub rsp , 2509365026 
-    lea 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    lea 
-    add 
-    mov 
-    add 
-    lea 
-    add 
-    mov 
-    add 
-    mov 
-    mov 
-    mov 
-    add 
-    lea 
-    add 
-    mov 
-    mov 
-    add 
-    lea 
-    add 
-    mov 
-    add 
-    lea 
-    add 
-    mov 
-    add 
-    mov 
-    mov 
-    mov 
-    add 
-    lea 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    add 
-    mov QWORD[rbp - 2509365026] , 
-    mov 
-    add 
-    mov 
-    mov 
-    add 
-    mov 
-    pop rbp 
-    ret 
+    mov r15 , 2 
+    mov r14 , 1 
+    mov r13 , r15 
+    add r13 , r14 
+    mov rbx , r13 
     pop rbp 
     ret 
 

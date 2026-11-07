@@ -5,9 +5,9 @@ int main(int argc,char** argv){
     IRVM vm = IRVM_New();
     IRVM_AddScript(&vm,"./code/Main." IRVM_TYPE);
     IRVM_Build(&vm);
-    IRVM_PrintFn(&vm);
+    //IRVM_PrintFn(&vm);
     //IRVM_Optimiser_Exe_All(&vm,0U);
-    //IRVM_Print(&vm);
+    IRVM_Print(&vm);
     //IRVM_Free(&vm);
     
     // "./arch/x64.yaml"

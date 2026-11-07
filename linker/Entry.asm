@@ -14,6 +14,6 @@ _start:
 	mov rbp,rsp
 	call f.main
 	;mov rax,69
-	mov	rdi,rax
+	mov	rdi,rbx
 	mov	rax,60
 	syscall
