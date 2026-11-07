@@ -11,7 +11,9 @@ extern f.main
 section .text
 
 _start:
+	mov rbp,rsp
 	call f.main
+	;mov rax,69
 	mov	rdi,rax
 	mov	rax,60
 	syscall

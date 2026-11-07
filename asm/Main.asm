@@ -18,28 +18,71 @@ section .text
 f.Human.new:
     push rbp 
     mov rbp , rsp 
-    sub rsp , 24 
-    add rsp , 1 
+    lea 
+    add 
+    mov 
+    add 
+    mov 
+    lea 
+    add 
+    mov 
+    add 
+    mov 
+    lea 
+    add 
+    mov 
+    lea 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
     pop rbp 
     ret 
-    add rsp , 1 
     pop rbp 
     ret 
 
 f.Human.add:
     push rbp 
     mov rbp , rsp 
-    sub rsp , 24 
-    add rsp , 1 
+    lea 
+    add 
+    mov 
+    add 
+    mov 
+    lea 
+    add 
+    mov 
+    add 
+    mov 
+    lea 
+    add 
+    mov 
+    lea 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
     pop rbp 
     ret 
-    add rsp , 1 
     pop rbp 
     ret 
 
 f.Human.sub:
     push rbp 
     mov rbp , rsp 
+    mov 
+    mov 
+    mov 
     pop rbp 
     ret 
     pop rbp 
@@ -48,19 +91,88 @@ f.Human.sub:
 f.main:
     push rbp 
     mov rbp , rsp 
-    sub rsp , 24 
+    mov 
+    add rsp , 2509365002 
     call f.Human.new 
-    sub rsp , 24 
+    sub rsp , 2509365002 
+    lea 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
+    lea 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
+    add rsp , 2509365026 
     call f.Human.add 
-    sub rsp , 8 
-    add rsp , 8 
-    add rsp , 1 
-    add rsp , 1 
+    sub rsp , 2509365026 
+    lea 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
+    lea 
+    add 
+    mov 
+    add 
+    lea 
+    add 
+    mov 
+    add 
+    mov 
+    mov 
+    mov 
+    add 
+    lea 
+    add 
+    mov 
+    mov 
+    add 
+    lea 
+    add 
+    mov 
+    add 
+    lea 
+    add 
+    mov 
+    add 
+    mov 
+    mov 
+    mov 
+    add 
+    lea 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
+    add 
+    mov QWORD[rbp - 2509365026] , 
+    mov 
+    add 
+    mov 
+    mov 
+    add 
+    mov 
     pop rbp 
     ret 
-    add rsp , 8 
-    add rsp , 1 
-    add rsp , 1 
     pop rbp 
     ret 
 
