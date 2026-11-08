@@ -11,7 +11,11 @@ extern f.syscall
 global f.main
 
 section .data
-cstr.0: db 'H','e','l','l','o',' ','W','o','r','l','d',10,0
+cstr.0: db '-','-',' ','S','t','a','r','t',' ','-','-',10,0
+cstr.1: db 'P','l','e','a','s','e',' ','t','y','p','e',' ','s','t','h',':',' ',0
+cstr.2: db ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',0
+cstr.3: db 'O','u','t','p','u','t',':',' ',0
+cstr.4: db '-','-','-','-','-','-','-','-','-','-','-',10,0
 
 section .bss
 
@@ -175,6 +179,452 @@ f.close:
     pop rbp 
     ret 
 
+f.mprotect:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 11 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push rdi 
+    push r8 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 72] 
+    mov rdi , QWORD[rbp - 64] 
+    mov r8 , QWORD[rbp - 56] 
+    mov r9 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov rax , QWORD[rbp - 80] 
+    mov QWORD[rbp - 80] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop r8 
+    pop rdi 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.munmap:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 11 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push rdi 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 64] 
+    mov rdi , QWORD[rbp - 56] 
+    mov r8 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 40] 
+    mov r10 , QWORD[rbp - 32] 
+    mov rax , QWORD[rbp - 72] 
+    mov QWORD[rbp - 72] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop rdi 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.brk:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 12 
+    mov r14 , rsi 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 56] 
+    mov rdi , QWORD[rbp - 48] 
+    mov r8 , QWORD[rbp - 40] 
+    mov r9 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov rax , QWORD[rbp - 64] 
+    mov QWORD[rbp - 64] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.ioctrl:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 16 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push rdi 
+    push r8 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 72] 
+    mov rdi , QWORD[rbp - 64] 
+    mov r8 , QWORD[rbp - 56] 
+    mov r9 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov rax , QWORD[rbp - 80] 
+    mov QWORD[rbp - 80] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop r8 
+    pop rdi 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.pipe:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 22 
+    mov r14 , rsi 
+    mov r13 , r14 
+    mov r14 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 56] 
+    mov rdi , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov rax , QWORD[rbp - 64] 
+    mov QWORD[rbp - 64] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.pause:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 34 
+    mov r14 , 0 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 48] 
+    mov rdi , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov r9 , QWORD[rbp - 24] 
+    mov r10 , QWORD[rbp - 16] 
+    mov rax , QWORD[rbp - 56] 
+    mov QWORD[rbp - 56] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.nanosleep:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 35 
+    mov r14 , rsi 
+    mov r13 , r14 
+    mov r14 , rdi 
+    mov r12 , r14 
+    mov r14 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push rdi 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 64] 
+    mov rdi , QWORD[rbp - 48] 
+    mov r8 , QWORD[rbp - 40] 
+    mov r9 , QWORD[rbp - 56] 
+    mov r10 , QWORD[rbp - 32] 
+    mov rax , QWORD[rbp - 72] 
+    mov QWORD[rbp - 72] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop rdi 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.alarm:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 37 
+    mov r14 , rsi 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 56] 
+    mov rdi , QWORD[rbp - 48] 
+    mov r8 , QWORD[rbp - 40] 
+    mov r9 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov rax , QWORD[rbp - 64] 
+    mov QWORD[rbp - 64] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.getpid:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 39 
+    mov r14 , 0 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 48] 
+    mov rdi , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov r9 , QWORD[rbp - 24] 
+    mov r10 , QWORD[rbp - 16] 
+    mov rax , QWORD[rbp - 56] 
+    mov QWORD[rbp - 56] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.fork:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 57 
+    mov r14 , 0 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 48] 
+    mov rdi , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov r9 , QWORD[rbp - 24] 
+    mov r10 , QWORD[rbp - 16] 
+    mov rax , QWORD[rbp - 56] 
+    mov QWORD[rbp - 56] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.vfork:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 58 
+    mov r14 , 0 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 48] 
+    mov rdi , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov r9 , QWORD[rbp - 24] 
+    mov r10 , QWORD[rbp - 16] 
+    mov rax , QWORD[rbp - 56] 
+    mov QWORD[rbp - 56] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.execve:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 59 
+    mov r14 , rsi 
+    mov r13 , r14 
+    mov r14 , rdi 
+    mov r12 , r14 
+    mov r14 , r8 
+    mov r11 , r14 
+    mov r14 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push rdi 
+    push r8 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 72] 
+    mov rdi , QWORD[rbp - 56] 
+    mov r8 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 40] 
+    mov r10 , QWORD[rbp - 64] 
+    mov rax , QWORD[rbp - 80] 
+    mov QWORD[rbp - 80] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop r8 
+    pop rdi 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
 f.exit:
     push rbp 
     mov rbp , rsp 
@@ -211,28 +661,142 @@ f.exit:
     pop rbp 
     ret 
 
-f.main:
+f.fcntl:
     push rbp 
     mov rbp , rsp 
-    mov QWORD[rbp - 8] , 0 
-    lea r15 , QWORD[rbp - 8] 
-    mov QWORD[rbp - 16] , r15 
-    mov QWORD[rbp - 24] , 0 
-    mov r15 , 1 
-    mov r14 , cstr.0 
-    mov r13 , 12 
-    sub rsp , 24 
+    mov r15 , 72 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push rdi 
+    push r8 
+    push r10 
+    push r11 
+    push r12 
     push r13 
     push r14 
     push r15 
-    mov rsi , QWORD[rbp - 48] 
-    mov rdi , QWORD[rbp - 40] 
-    mov r8 , QWORD[rbp - 32] 
+    mov rsi , QWORD[rbp - 72] 
+    mov rdi , QWORD[rbp - 64] 
+    mov r8 , QWORD[rbp - 56] 
+    mov r9 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov rax , QWORD[rbp - 80] 
+    mov QWORD[rbp - 80] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop r8 
+    pop rdi 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.main:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 1 
+    mov r14 , cstr.0 
+    mov r13 , 12 
+    sub rsp , 0 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 24] 
+    mov rdi , QWORD[rbp - 16] 
+    mov r8 , QWORD[rbp - 8] 
     call f.write 
     pop r15 
     pop r14 
     pop r13 
-    add rsp , 24 
+    add rsp , 0 
+    mov r15 , 1 
+    mov r14 , cstr.1 
+    mov r13 , 17 
+    sub rsp , 0 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 24] 
+    mov rdi , QWORD[rbp - 16] 
+    mov r8 , QWORD[rbp - 8] 
+    call f.write 
+    pop r15 
+    pop r14 
+    pop r13 
+    add rsp , 0 
+    mov QWORD[rbp - 8] , cstr.2 
+    mov r15 , 0 
+    mov r14 , QWORD[rbp - 8] 
+    mov r13 , r14 
+    mov r14 , 12 
+    sub rsp , 8 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 16] 
+    mov r8 , QWORD[rbp - 24] 
+    call f.read 
+    pop r15 
+    pop r14 
+    pop r13 
+    add rsp , 8 
+    mov r15 , 1 
+    mov r14 , cstr.3 
+    mov r13 , 8 
+    sub rsp , 8 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov r8 , QWORD[rbp - 16] 
+    call f.write 
+    pop r15 
+    pop r14 
+    pop r13 
+    add rsp , 8 
+    mov r15 , 1 
+    mov r14 , QWORD[rbp - 8] 
+    mov r13 , r14 
+    mov r14 , 12 
+    sub rsp , 8 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 16] 
+    mov r8 , QWORD[rbp - 24] 
+    call f.write 
+    pop r15 
+    pop r14 
+    pop r13 
+    add rsp , 8 
+    mov r15 , 1 
+    mov r14 , cstr.4 
+    mov r13 , 12 
+    sub rsp , 8 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov r8 , QWORD[rbp - 16] 
+    call f.write 
+    pop r15 
+    pop r14 
+    pop r13 
+    add rsp , 8 
     mov r15 , 0 
     mov rbx , r15 
     pop rbp 
