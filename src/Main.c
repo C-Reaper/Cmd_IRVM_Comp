@@ -8,6 +8,7 @@ int main(int argc,char** argv){
     //IRVM_PrintFn(&vm);
     //IRVM_Optimiser_Exe_All(&vm,0U);
     IRVM_Print(&vm);
+    //IRVM_Save(&vm,"./code/Save." IRVM_TYPE);
     //IRVM_Free(&vm);
     
     // "./arch/x64.yaml"

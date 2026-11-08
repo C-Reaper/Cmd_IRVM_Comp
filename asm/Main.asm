@@ -7,114 +7,234 @@
 
 bits 64
 
+extern f.syscall
 global f.main
 
 section .data
+cstr.0: db 'H','e','l','l','o',' ','W','o','r','l','d',10,0
 
 section .bss
 
 section .text
 
-f.Human.init:
+f.read:
     push rbp 
     mov rbp , rsp 
-    mov r15 , rsi 
-    mov r14 , r15 
-    add r14 , 0 
-    mov QWORD[r14] , rdi 
-    pop rbp 
-    ret 
-
-f.Human.delete:
-    push rbp 
-    mov rbp , rsp 
-    mov r15 , rsi 
-    mov r14 , r15 
-    add r14 , 0 
-    mov r15 , QWORD[r14] 
-    mov r13 , r15 
-    sub r13 , rdi 
-    mov QWORD[r14] , r13 
-    pop rbp 
-    ret 
-
-f.Human.new:
-    push rbp 
-    mov rbp , rsp 
-    lea r15 , QWORD[rbp - 8] 
-    mov r14 , r15 
-    mov r15 , rsi 
-    sub rsp , 8 
+    mov r15 , 0 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r13 
+    mov r13 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
     push rsi 
+    push rdi 
+    push r8 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
     push r14 
     push r15 
-    mov rsi , QWORD[rbp - 24] 
-    mov rdi , QWORD[rbp - 32] 
-    call f.Human.init 
+    mov rsi , QWORD[rbp - 72] 
+    mov rdi , QWORD[rbp - 64] 
+    mov r8 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 56] 
+    mov r10 , QWORD[rbp - 40] 
+    mov rax , QWORD[rbp - 80] 
+    mov QWORD[rbp - 80] , rax 
+    call f.syscall 
     pop r15 
     pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop r8 
+    pop rdi 
     pop rsi 
-    add rsp , 8 
-    lea r15 , QWORD[rbp - 8] 
-    mov r14 , r15 
-    add r14 , 0 
-    mov r15 , QWORD[r14] 
-    mov rbx , r15 
+    add rsp , 0 
     pop rbp 
     ret 
+
+f.write:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 1 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r13 
+    mov r13 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push rdi 
+    push r8 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 72] 
+    mov rdi , QWORD[rbp - 64] 
+    mov r8 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 56] 
+    mov r10 , QWORD[rbp - 40] 
+    mov rax , QWORD[rbp - 80] 
+    mov QWORD[rbp - 80] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop r8 
+    pop rdi 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.open:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 2 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push rdi 
+    push r8 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 72] 
+    mov rdi , QWORD[rbp - 64] 
+    mov r8 , QWORD[rbp - 56] 
+    mov r9 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov rax , QWORD[rbp - 80] 
+    mov QWORD[rbp - 80] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop r8 
+    pop rdi 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.close:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 3 
+    mov r14 , rsi 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 56] 
+    mov rdi , QWORD[rbp - 48] 
+    mov r8 , QWORD[rbp - 40] 
+    mov r9 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov rax , QWORD[rbp - 64] 
+    mov QWORD[rbp - 64] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop rsi 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.exit:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 60 
+    mov r14 , rsi 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    sub rsp , 0 
+    push rsi 
+    push r10 
+    push r11 
+    push r12 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 56] 
+    mov rdi , QWORD[rbp - 48] 
+    mov r8 , QWORD[rbp - 40] 
+    mov r9 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov rax , QWORD[rbp - 64] 
+    mov QWORD[rbp - 64] , rax 
+    call f.syscall 
+    pop r15 
+    pop r14 
+    pop r13 
+    pop r12 
+    pop r11 
+    pop r10 
+    pop rsi 
+    add rsp , 0 
     pop rbp 
     ret 
 
 f.main:
     push rbp 
     mov rbp , rsp 
-    mov r15 , 20 
-    sub rsp , 8 
-    push r15 
-    mov rsi , QWORD[rbp - 16] 
-    call f.Human.new 
-    pop r15 
-    mov r14 , rbx 
-    add rsp , 8 
+    mov QWORD[rbp - 8] , 0 
     lea r15 , QWORD[rbp - 8] 
-    mov r13 , r15 
-    add r13 , 0 
-    mov QWORD[r13] , r14 
-    lea r15 , QWORD[rbp - 8] 
-    mov r14 , r15 
-    mov r15 , 10 
-    sub rsp , 8 
-    push r13 
-    push r14 
-    push r15 
-    mov rsi , QWORD[rbp - 24] 
-    mov rdi , QWORD[rbp - 32] 
-    call f.Human.delete 
-    pop r15 
-    pop r14 
-    pop r13 
-    add rsp , 8 
-    lea r15 , QWORD[rbp - 8] 
-    mov r14 , r15 
-    mov r15 , 5 
-    sub rsp , 8 
-    push r13 
-    push r14 
-    push r15 
-    mov rsi , QWORD[rbp - 24] 
-    mov rdi , QWORD[rbp - 32] 
-    call f.Human.delete 
-    pop r15 
-    pop r14 
-    pop r13 
-    add rsp , 8 
-    lea r15 , QWORD[rbp - 8] 
-    add r15 , 0 
-    mov r14 , QWORD[r15] 
+    mov QWORD[rbp - 16] , r15 
+    mov QWORD[rbp - 24] , 0 
     mov r15 , 1 
-    add r15 , r14 
-    mov r14 , r15 
-    mov rbx , r14 
+    mov r14 , cstr.0 
+    mov r13 , 12 
+    sub rsp , 24 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 48] 
+    mov rdi , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    call f.write 
+    pop r15 
+    pop r14 
+    pop r13 
+    add rsp , 24 
+    mov r15 , 0 
+    mov rbx , r15 
     pop rbp 
     ret 
     pop rbp 
