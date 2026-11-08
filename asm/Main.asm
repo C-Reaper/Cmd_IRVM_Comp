@@ -15,23 +15,108 @@ section .bss
 
 section .text
 
-f.fn_add:
+f.Human.init:
     push rbp 
     mov rbp , rsp 
     mov r15 , rsi 
-    add r15 , rdi 
+    mov r14 , r15 
+    add r14 , 0 
+    mov QWORD[r14] , rdi 
+    pop rbp 
+    ret 
+
+f.Human.delete:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , rsi 
+    mov r14 , r15 
+    add r14 , 0 
+    mov r15 , QWORD[r14] 
+    mov r13 , r15 
+    sub r13 , rdi 
+    mov QWORD[r14] , r13 
+    pop rbp 
+    ret 
+
+f.Human.new:
+    push rbp 
+    mov rbp , rsp 
+    lea r15 , QWORD[rbp - 8] 
+    mov r14 , r15 
+    mov r15 , rsi 
+    sub rsp , 8 
+    push rsi 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 24] 
+    mov rdi , QWORD[rbp - 32] 
+    call f.Human.init 
+    pop r15 
+    pop r14 
+    pop rsi 
+    add rsp , 8 
+    lea r15 , QWORD[rbp - 8] 
+    mov r14 , r15 
+    add r14 , 0 
+    mov r15 , QWORD[r14] 
     mov rbx , r15 
+    pop rbp 
+    ret 
     pop rbp 
     ret 
 
 f.main:
     push rbp 
     mov rbp , rsp 
-    mov r15 , 2 
-    mov r14 , 1 
+    mov r15 , 20 
+    sub rsp , 8 
+    push r15 
+    mov rsi , QWORD[rbp - 16] 
+    call f.Human.new 
+    pop r15 
+    mov r14 , rbx 
+    add rsp , 8 
+    lea r15 , QWORD[rbp - 8] 
     mov r13 , r15 
-    add r13 , r14 
-    mov rbx , r13 
+    add r13 , 0 
+    mov QWORD[r13] , r14 
+    lea r15 , QWORD[rbp - 8] 
+    mov r14 , r15 
+    mov r15 , 10 
+    sub rsp , 8 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 24] 
+    mov rdi , QWORD[rbp - 32] 
+    call f.Human.delete 
+    pop r15 
+    pop r14 
+    pop r13 
+    add rsp , 8 
+    lea r15 , QWORD[rbp - 8] 
+    mov r14 , r15 
+    mov r15 , 5 
+    sub rsp , 8 
+    push r13 
+    push r14 
+    push r15 
+    mov rsi , QWORD[rbp - 24] 
+    mov rdi , QWORD[rbp - 32] 
+    call f.Human.delete 
+    pop r15 
+    pop r14 
+    pop r13 
+    add rsp , 8 
+    lea r15 , QWORD[rbp - 8] 
+    add r15 , 0 
+    mov r14 , QWORD[r15] 
+    mov r15 , 1 
+    add r15 , r14 
+    mov r14 , r15 
+    mov rbx , r14 
+    pop rbp 
+    ret 
     pop rbp 
     ret 
 

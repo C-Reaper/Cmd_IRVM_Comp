@@ -12,6 +12,8 @@ section .text
 
 _start:
 	mov rbp,rsp
+	mov	rsi,1
+	mov	rdi,2
 	call f.main
 	;mov rax,69
 	mov	rdi,rbx
