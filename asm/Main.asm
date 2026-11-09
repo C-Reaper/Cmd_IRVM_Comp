@@ -7,1214 +7,1004 @@
 
 bits 64
 
+extern f.syscall
 global f.main
 
 section .data
+cstr.0: db '-','-',' ','S','t','a','r','t',' ','-','-',10,0
+cstr.1: db 'P','l','e','a','s','e',' ','t','y','p','e',' ','s','t','h',':',' ',0
+cstr.2: db ' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',0
+cstr.3: db 'O','u','t','p','u','t',':',' ',0
+cstr.4: db '-','-','-','-','-','-','-','-','-','-','-',10,0
 
 section .bss
 
 section .text
 
-f.add10:
+f.read:
     push rbp 
     mov rbp , rsp 
-    mov r15 , rsi 
-    add r15 , rdi 
-    mov r14 , r15 
-    add r14 , r8 
-    mov r15 , r14 
-    add r15 , r9 
-    mov r14 , r15 
-    and r10 , 0xFFFFFFFF 
-    add r14 , r10 
-    mov r15 , r14 
-    xor rdx , rdx 
-    mov edx , DWORD[rbp - 20] 
-    add r15 , rdx 
-    mov r14 , r15 
-    xor rdx , rdx 
-    mov dx , WORD[rbp - 16] 
-    add r14 , rdx 
-    mov r15 , r14 
-    xor rdx , rdx 
-    mov dx , WORD[rbp - 14] 
-    add r15 , rdx 
-    mov r14 , r15 
-    xor rdx , rdx 
-    mov dx , WORD[rbp - 12] 
-    add r14 , rdx 
-    mov r15 , r14 
-    xor rdx , rdx 
-    mov dx , WORD[rbp - 10] 
-    add r15 , rdx 
-    mov r14 , r15 
-    mov rbx , r14 
-    pop rbp 
-    ret 
+    mov r15 , 0 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r13 
+    mov r13 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r8 
+    mov QWORD[rbp - 40] , r10 
+    mov QWORD[rbp - 48] , r11 
+    mov QWORD[rbp - 56] , r12 
+    mov QWORD[rbp - 64] , r13 
+    mov QWORD[rbp - 72] , r14 
+    mov QWORD[rbp - 80] , r15 
+    mov rsi , QWORD[rbp - 80] 
+    mov rdi , QWORD[rbp - 72] 
+    mov r8 , QWORD[rbp - 56] 
+    mov r9 , QWORD[rbp - 64] 
+    mov r10 , QWORD[rbp - 48] 
+    mov r11 , QWORD[rbp - 40] 
+    sub rsp , 80 
+    call f.syscall 
+    add rsp , 80 
+    mov r15 , QWORD[rbp - 80] 
+    mov r14 , QWORD[rbp - 72] 
+    mov r13 , QWORD[rbp - 64] 
+    mov r12 , QWORD[rbp - 56] 
+    mov r11 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
     pop rbp 
     ret 
 
-f.newh:
+f.write:
     push rbp 
     mov rbp , rsp 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    add QWORD[rbp - 44] , 0x0 
-    mov rdx , QWORD[rbp - 44] 
-    mov QWORD[rdx] , rsi 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    add QWORD[rbp - 44] , 0x8 
-    mov rdx , QWORD[rbp - 44] 
-    mov QWORD[rdx] , rdi 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    add QWORD[rbp - 44] , 0x10 
-    mov rdx , QWORD[rbp - 44] 
-    mov QWORD[rdx] , r8 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    add QWORD[rbp - 44] , 0x18 
-    mov rdx , QWORD[rbp - 44] 
-    mov QWORD[rdx] , r9 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    add QWORD[rbp - 44] , 0x20 
-    mov rdx , QWORD[rbp - 44] 
-    mov DWORD[rdx] , r10d 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    add QWORD[rbp - 44] , 0x24 
-    mov rdx , QWORD[rbp - 44] 
-    mov eax , DWORD[rbp - 20] 
-    mov DWORD[rdx] , eax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    add QWORD[rbp - 44] , 0x28 
-    mov rdx , QWORD[rbp - 44] 
-    mov ax , WORD[rbp - 16] 
-    mov WORD[rdx] , ax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    add QWORD[rbp - 44] , 0x2A 
-    mov rdx , QWORD[rbp - 44] 
-    mov ax , WORD[rbp - 14] 
-    mov WORD[rdx] , ax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    add QWORD[rbp - 44] , 0x2C 
-    mov rdx , QWORD[rbp - 44] 
-    mov ax , WORD[rbp - 12] 
-    mov WORD[rdx] , ax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    add QWORD[rbp - 44] , 0x2E 
-    mov rdx , QWORD[rbp - 44] 
-    mov ax , WORD[rbp - 10] 
-    mov WORD[rdx] , ax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 44] , rax 
-    mov rax , QWORD[rbp - 44] 
-    mov QWORD[rbp - 52] , rax 
-    add QWORD[rbp - 52] , 0x0 
-    mov rdx , QWORD[rbp - 52] 
-    mov r15 , QWORD[rdx] 
-    mov rax , QWORD[rbp - 44] 
-    mov QWORD[rbp - 52] , rax 
-    add QWORD[rbp - 52] , 0x8 
-    mov rdx , QWORD[rbp - 52] 
-    mov r14 , QWORD[rdx] 
-    mov rax , QWORD[rbp - 44] 
-    mov QWORD[rbp - 52] , rax 
-    add QWORD[rbp - 52] , 0x10 
-    mov rdx , QWORD[rbp - 52] 
-    mov r13 , QWORD[rdx] 
-    mov rax , QWORD[rbp - 44] 
-    mov QWORD[rbp - 52] , rax 
-    add QWORD[rbp - 52] , 0x18 
-    mov rdx , QWORD[rbp - 52] 
-    mov r12 , QWORD[rdx] 
-    mov eax , DWORD[rbp - 44] 
-    mov DWORD[rbp - 20] , eax 
-    add DWORD[rbp - 20] , 0x20 
-    mov rdx , QWORD[rbp - 20] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 32] , eax 
-    mov eax , DWORD[rbp - 44] 
-    mov DWORD[rbp - 20] , eax 
-    add DWORD[rbp - 20] , 0x24 
-    mov rdx , QWORD[rbp - 20] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 36] , eax 
-    mov ax , WORD[rbp - 44] 
-    mov WORD[rbp - 10] , ax 
-    add WORD[rbp - 10] , 0x28 
-    mov rdx , QWORD[rbp - 10] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 12] , ax 
-    mov ax , WORD[rbp - 44] 
-    mov WORD[rbp - 10] , ax 
-    add WORD[rbp - 10] , 0x2A 
-    mov rdx , QWORD[rbp - 10] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 14] , ax 
-    mov ax , WORD[rbp - 44] 
-    mov WORD[rbp - 10] , ax 
-    add WORD[rbp - 10] , 0x2C 
-    mov rdx , QWORD[rbp - 10] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 16] , ax 
-    mov ax , WORD[rbp - 44] 
-    mov WORD[rbp - 10] , ax 
-    add WORD[rbp - 10] , 0x2E 
-    mov rdx , QWORD[rbp - 10] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 18] , ax 
-    mov rbx , r15 
-    mov rcx , r14 
-    xor rdx , rdx 
-    mov edx , DWORD[rbp - 36] 
-    mov rdx , r13 
-    xor rdx , rdx 
-    mov edx , DWORD[rbp - 32] 
-    mov rdx , r12 
-    xor edx , edx 
-    mov dx , WORD[rbp - 28] 
-    mov edx , DWORD[rbp - 32] 
-    xor edx , edx 
-    mov dx , WORD[rbp - 26] 
-    mov edx , DWORD[rbp - 36] 
-    mov ax , WORD[rbp - 12] 
-    mov WORD[rbp - 24] , ax 
-    mov ax , WORD[rbp - 14] 
-    mov WORD[rbp - 22] , ax 
-    mov ax , WORD[rbp - 16] 
-    mov WORD[rbp - 18] , ax 
-    mov ax , WORD[rbp - 18] 
-    mov WORD[rbp - 16] , ax 
-    pop rbp 
-    ret 
+    mov r15 , 1 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r13 
+    mov r13 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r8 
+    mov QWORD[rbp - 40] , r10 
+    mov QWORD[rbp - 48] , r11 
+    mov QWORD[rbp - 56] , r12 
+    mov QWORD[rbp - 64] , r13 
+    mov QWORD[rbp - 72] , r14 
+    mov QWORD[rbp - 80] , r15 
+    mov rsi , QWORD[rbp - 80] 
+    mov rdi , QWORD[rbp - 72] 
+    mov r8 , QWORD[rbp - 56] 
+    mov r9 , QWORD[rbp - 64] 
+    mov r10 , QWORD[rbp - 48] 
+    mov r11 , QWORD[rbp - 40] 
+    sub rsp , 80 
+    call f.syscall 
+    add rsp , 80 
+    mov r15 , QWORD[rbp - 80] 
+    mov r14 , QWORD[rbp - 72] 
+    mov r13 , QWORD[rbp - 64] 
+    mov r12 , QWORD[rbp - 56] 
+    mov r11 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
     pop rbp 
     ret 
 
-f.addh:
+f.open:
     push rbp 
     mov rbp , rsp 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 92] , rax 
-    add QWORD[rbp - 92] , 0x0 
-    mov QWORD[rbp - 100] , rsi 
-    mov rax , QWORD[rbp - 56] 
-    add QWORD[rbp - 100] , rax 
-    mov rdx , QWORD[rbp - 92] 
-    mov rax , QWORD[rbp - 100] 
-    mov QWORD[rdx] , rax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 56] , rax 
-    add QWORD[rbp - 56] , 0x8 
-    mov QWORD[rbp - 92] , rdi 
-    mov rax , QWORD[rbp - 48] 
-    add QWORD[rbp - 92] , rax 
-    mov rdx , QWORD[rbp - 56] 
-    mov rax , QWORD[rbp - 92] 
-    mov QWORD[rdx] , rax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 48] , rax 
-    add QWORD[rbp - 48] , 0x10 
-    mov QWORD[rbp - 56] , r8 
-    mov rax , QWORD[rbp - 40] 
-    add QWORD[rbp - 56] , rax 
-    mov rdx , QWORD[rbp - 48] 
-    mov rax , QWORD[rbp - 56] 
-    mov QWORD[rdx] , rax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 40] , rax 
-    add QWORD[rbp - 40] , 0x18 
-    mov QWORD[rbp - 48] , r9 
-    mov rax , QWORD[rbp - 32] 
-    add QWORD[rbp - 48] , rax 
-    mov rdx , QWORD[rbp - 40] 
-    mov rax , QWORD[rbp - 48] 
-    mov QWORD[rdx] , rax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 32] , rax 
-    add QWORD[rbp - 32] , 0x20 
-    mov DWORD[rbp - 36] , r10d 
-    mov eax , DWORD[rbp - 24] 
-    add DWORD[rbp - 36] , eax 
-    mov rdx , QWORD[rbp - 32] 
-    mov eax , DWORD[rbp - 36] 
-    mov DWORD[rdx] , eax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 32] , rax 
-    add QWORD[rbp - 32] , 0x24 
-    mov eax , DWORD[rbp - 68] 
-    mov DWORD[rbp - 24] , eax 
-    mov eax , DWORD[rbp - 20] 
-    add DWORD[rbp - 24] , eax 
-    mov rdx , QWORD[rbp - 32] 
-    mov eax , DWORD[rbp - 24] 
-    mov DWORD[rdx] , eax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 32] , rax 
-    add QWORD[rbp - 32] , 0x28 
-    mov ax , WORD[rbp - 64] 
-    mov WORD[rbp - 18] , ax 
-    mov ax , WORD[rbp - 16] 
-    add WORD[rbp - 18] , ax 
-    mov rdx , QWORD[rbp - 32] 
-    mov ax , WORD[rbp - 18] 
-    mov WORD[rdx] , ax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 32] , rax 
-    add QWORD[rbp - 32] , 0x2A 
-    mov ax , WORD[rbp - 62] 
-    mov WORD[rbp - 16] , ax 
-    mov ax , WORD[rbp - 14] 
-    add WORD[rbp - 16] , ax 
-    mov rdx , QWORD[rbp - 32] 
-    mov ax , WORD[rbp - 16] 
-    mov WORD[rdx] , ax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 32] , rax 
-    add QWORD[rbp - 32] , 0x2C 
-    mov ax , WORD[rbp - 60] 
-    mov WORD[rbp - 14] , ax 
-    mov ax , WORD[rbp - 12] 
-    add WORD[rbp - 14] , ax 
-    mov rdx , QWORD[rbp - 32] 
-    mov ax , WORD[rbp - 14] 
-    mov WORD[rdx] , ax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 32] , rax 
-    add QWORD[rbp - 32] , 0x2E 
-    mov ax , WORD[rbp - 58] 
-    mov WORD[rbp - 12] , ax 
-    mov ax , WORD[rbp - 10] 
-    add WORD[rbp - 12] , ax 
-    mov rdx , QWORD[rbp - 32] 
-    mov ax , WORD[rbp - 12] 
-    mov WORD[rdx] , ax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 32] , rax 
-    mov rax , QWORD[rbp - 32] 
-    mov QWORD[rbp - 40] , rax 
-    add QWORD[rbp - 40] , 0x0 
-    mov rdx , QWORD[rbp - 40] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 48] , rax 
-    mov rax , QWORD[rbp - 32] 
-    mov QWORD[rbp - 40] , rax 
-    add QWORD[rbp - 40] , 0x8 
-    mov rdx , QWORD[rbp - 40] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 56] , rax 
-    mov rax , QWORD[rbp - 32] 
-    mov QWORD[rbp - 40] , rax 
-    add QWORD[rbp - 40] , 0x10 
-    mov rdx , QWORD[rbp - 40] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 92] , rax 
-    mov rax , QWORD[rbp - 32] 
-    mov QWORD[rbp - 40] , rax 
-    add QWORD[rbp - 40] , 0x18 
-    mov rdx , QWORD[rbp - 40] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 100] , rax 
-    mov eax , DWORD[rbp - 32] 
-    mov DWORD[rbp - 20] , eax 
-    add DWORD[rbp - 20] , 0x20 
-    mov rdx , QWORD[rbp - 20] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 24] , eax 
-    mov eax , DWORD[rbp - 32] 
-    mov DWORD[rbp - 20] , eax 
-    add DWORD[rbp - 20] , 0x24 
-    mov rdx , QWORD[rbp - 20] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 36] , eax 
-    mov ax , WORD[rbp - 32] 
-    mov WORD[rbp - 10] , ax 
-    add WORD[rbp - 10] , 0x28 
-    mov rdx , QWORD[rbp - 10] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 12] , ax 
-    mov ax , WORD[rbp - 32] 
-    mov WORD[rbp - 10] , ax 
-    add WORD[rbp - 10] , 0x2A 
-    mov rdx , QWORD[rbp - 10] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 14] , ax 
-    mov ax , WORD[rbp - 32] 
-    mov WORD[rbp - 10] , ax 
-    add WORD[rbp - 10] , 0x2C 
-    mov rdx , QWORD[rbp - 10] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 16] , ax 
-    mov ax , WORD[rbp - 32] 
-    mov WORD[rbp - 10] , ax 
-    add WORD[rbp - 10] , 0x2E 
-    mov rdx , QWORD[rbp - 10] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 18] , ax 
-    mov rbx , QWORD[rbp - 48] 
-    mov rcx , QWORD[rbp - 56] 
-    xor rdx , rdx 
-    mov edx , DWORD[rbp - 84] 
-    mov rdx , QWORD[rbp - 92] 
-    xor rdx , rdx 
-    mov edx , DWORD[rbp - 80] 
-    mov rdx , QWORD[rbp - 100] 
-    xor edx , edx 
-    mov dx , WORD[rbp - 76] 
-    mov edx , DWORD[rbp - 24] 
-    xor edx , edx 
-    mov dx , WORD[rbp - 74] 
-    mov edx , DWORD[rbp - 36] 
-    mov ax , WORD[rbp - 12] 
-    mov WORD[rbp - 72] , ax 
-    mov ax , WORD[rbp - 14] 
-    mov WORD[rbp - 70] , ax 
-    mov ax , WORD[rbp - 16] 
-    mov WORD[rbp - 68] , ax 
-    mov ax , WORD[rbp - 18] 
-    mov WORD[rbp - 64] , ax 
-    pop rbp 
-    ret 
+    mov r15 , 2 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r8 
+    mov QWORD[rbp - 40] , r10 
+    mov QWORD[rbp - 48] , r11 
+    mov QWORD[rbp - 56] , r12 
+    mov QWORD[rbp - 64] , r13 
+    mov QWORD[rbp - 72] , r14 
+    mov QWORD[rbp - 80] , r15 
+    mov rsi , QWORD[rbp - 80] 
+    mov rdi , QWORD[rbp - 72] 
+    mov r8 , QWORD[rbp - 64] 
+    mov r9 , QWORD[rbp - 56] 
+    mov r10 , QWORD[rbp - 48] 
+    mov r11 , QWORD[rbp - 40] 
+    sub rsp , 80 
+    call f.syscall 
+    add rsp , 80 
+    mov r15 , QWORD[rbp - 80] 
+    mov r14 , QWORD[rbp - 72] 
+    mov r13 , QWORD[rbp - 64] 
+    mov r12 , QWORD[rbp - 56] 
+    mov r11 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
     pop rbp 
     ret 
 
-f.foldh:
+f.close:
     push rbp 
     mov rbp , rsp 
-    mov r15 , rsi 
-    add r15 , rdi 
-    mov r14 , r15 
-    add r14 , r8 
-    mov r15 , r14 
-    add r15 , r9 
-    mov r14 , r15 
-    and r10 , 0xFFFFFFFF 
-    add r14 , r10 
-    mov r15 , r14 
-    xor rdx , rdx 
-    mov edx , DWORD[rbp - 20] 
-    add r15 , rdx 
-    mov r14 , r15 
-    xor rdx , rdx 
-    mov dx , WORD[rbp - 16] 
-    add r14 , rdx 
-    mov r15 , r14 
-    xor rdx , rdx 
-    mov dx , WORD[rbp - 14] 
-    add r15 , rdx 
-    mov r14 , r15 
-    xor rdx , rdx 
-    mov dx , WORD[rbp - 12] 
-    add r14 , rdx 
-    mov r15 , r14 
-    xor rdx , rdx 
-    mov dx , WORD[rbp - 10] 
-    add r15 , rdx 
-    mov r14 , r15 
-    mov rbx , r14 
+    mov r15 , 3 
+    mov r14 , rsi 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , r10 
+    mov QWORD[rbp - 32] , r11 
+    mov QWORD[rbp - 40] , r12 
+    mov QWORD[rbp - 48] , r13 
+    mov QWORD[rbp - 56] , r14 
+    mov QWORD[rbp - 64] , r15 
+    mov rsi , QWORD[rbp - 64] 
+    mov rdi , QWORD[rbp - 56] 
+    mov r8 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 40] 
+    mov r10 , QWORD[rbp - 32] 
+    mov r11 , QWORD[rbp - 24] 
+    sub rsp , 64 
+    call f.syscall 
+    add rsp , 64 
+    mov r15 , QWORD[rbp - 64] 
+    mov r14 , QWORD[rbp - 56] 
+    mov r13 , QWORD[rbp - 48] 
+    mov r12 , QWORD[rbp - 40] 
+    mov r11 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
     pop rbp 
     ret 
+
+f.mmap:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 9 
+    mov r14 , rsi 
+    mov r13 , r14 
+    mov r14 , rdi 
+    mov r12 , r8 
+    mov r11 , r9 
+    mov r9 , r10 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r8 
+    mov QWORD[rbp - 40] , r9 
+    mov QWORD[rbp - 48] , r10 
+    mov QWORD[rbp - 56] , r11 
+    mov QWORD[rbp - 64] , r12 
+    mov QWORD[rbp - 72] , r13 
+    mov QWORD[rbp - 80] , r14 
+    mov QWORD[rbp - 88] , r15 
+    mov rsi , QWORD[rbp - 88] 
+    mov rdi , QWORD[rbp - 72] 
+    mov r8 , QWORD[rbp - 80] 
+    mov r9 , QWORD[rbp - 64] 
+    mov r10 , QWORD[rbp - 56] 
+    mov r11 , QWORD[rbp - 40] 
+    sub rsp , 88 
+    call f.syscall 
+    add rsp , 88 
+    mov r15 , QWORD[rbp - 88] 
+    mov r14 , QWORD[rbp - 80] 
+    mov r13 , QWORD[rbp - 72] 
+    mov r12 , QWORD[rbp - 64] 
+    mov r11 , QWORD[rbp - 56] 
+    mov r10 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.mprotect:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 11 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r8 
+    mov QWORD[rbp - 40] , r10 
+    mov QWORD[rbp - 48] , r11 
+    mov QWORD[rbp - 56] , r12 
+    mov QWORD[rbp - 64] , r13 
+    mov QWORD[rbp - 72] , r14 
+    mov QWORD[rbp - 80] , r15 
+    mov rsi , QWORD[rbp - 80] 
+    mov rdi , QWORD[rbp - 72] 
+    mov r8 , QWORD[rbp - 64] 
+    mov r9 , QWORD[rbp - 56] 
+    mov r10 , QWORD[rbp - 48] 
+    mov r11 , QWORD[rbp - 40] 
+    sub rsp , 80 
+    call f.syscall 
+    add rsp , 80 
+    mov r15 , QWORD[rbp - 80] 
+    mov r14 , QWORD[rbp - 72] 
+    mov r13 , QWORD[rbp - 64] 
+    mov r12 , QWORD[rbp - 56] 
+    mov r11 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.munmap:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 11 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r10 
+    mov QWORD[rbp - 40] , r11 
+    mov QWORD[rbp - 48] , r12 
+    mov QWORD[rbp - 56] , r13 
+    mov QWORD[rbp - 64] , r14 
+    mov QWORD[rbp - 72] , r15 
+    mov rsi , QWORD[rbp - 72] 
+    mov rdi , QWORD[rbp - 64] 
+    mov r8 , QWORD[rbp - 56] 
+    mov r9 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov r11 , QWORD[rbp - 32] 
+    sub rsp , 72 
+    call f.syscall 
+    add rsp , 72 
+    mov r15 , QWORD[rbp - 72] 
+    mov r14 , QWORD[rbp - 64] 
+    mov r13 , QWORD[rbp - 56] 
+    mov r12 , QWORD[rbp - 48] 
+    mov r11 , QWORD[rbp - 40] 
+    mov r10 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.brk:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 12 
+    mov r14 , rsi 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , r10 
+    mov QWORD[rbp - 32] , r11 
+    mov QWORD[rbp - 40] , r12 
+    mov QWORD[rbp - 48] , r13 
+    mov QWORD[rbp - 56] , r14 
+    mov QWORD[rbp - 64] , r15 
+    mov rsi , QWORD[rbp - 64] 
+    mov rdi , QWORD[rbp - 56] 
+    mov r8 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 40] 
+    mov r10 , QWORD[rbp - 32] 
+    mov r11 , QWORD[rbp - 24] 
+    sub rsp , 64 
+    call f.syscall 
+    add rsp , 64 
+    mov r15 , QWORD[rbp - 64] 
+    mov r14 , QWORD[rbp - 56] 
+    mov r13 , QWORD[rbp - 48] 
+    mov r12 , QWORD[rbp - 40] 
+    mov r11 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.ioctrl:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 16 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r8 
+    mov QWORD[rbp - 40] , r10 
+    mov QWORD[rbp - 48] , r11 
+    mov QWORD[rbp - 56] , r12 
+    mov QWORD[rbp - 64] , r13 
+    mov QWORD[rbp - 72] , r14 
+    mov QWORD[rbp - 80] , r15 
+    mov rsi , QWORD[rbp - 80] 
+    mov rdi , QWORD[rbp - 72] 
+    mov r8 , QWORD[rbp - 64] 
+    mov r9 , QWORD[rbp - 56] 
+    mov r10 , QWORD[rbp - 48] 
+    mov r11 , QWORD[rbp - 40] 
+    sub rsp , 80 
+    call f.syscall 
+    add rsp , 80 
+    mov r15 , QWORD[rbp - 80] 
+    mov r14 , QWORD[rbp - 72] 
+    mov r13 , QWORD[rbp - 64] 
+    mov r12 , QWORD[rbp - 56] 
+    mov r11 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.pipe:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 22 
+    mov r14 , rsi 
+    mov r13 , r14 
+    mov r14 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , r10 
+    mov QWORD[rbp - 32] , r11 
+    mov QWORD[rbp - 40] , r12 
+    mov QWORD[rbp - 48] , r13 
+    mov QWORD[rbp - 56] , r14 
+    mov QWORD[rbp - 64] , r15 
+    mov rsi , QWORD[rbp - 64] 
+    mov rdi , QWORD[rbp - 48] 
+    mov r8 , QWORD[rbp - 56] 
+    mov r9 , QWORD[rbp - 40] 
+    mov r10 , QWORD[rbp - 32] 
+    mov r11 , QWORD[rbp - 24] 
+    sub rsp , 64 
+    call f.syscall 
+    add rsp , 64 
+    mov r15 , QWORD[rbp - 64] 
+    mov r14 , QWORD[rbp - 56] 
+    mov r13 , QWORD[rbp - 48] 
+    mov r12 , QWORD[rbp - 40] 
+    mov r11 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.select:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 23 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r13 
+    mov r13 , r8 
+    mov r11 , r13 
+    mov r13 , r9 
+    mov r9 , r13 
+    mov r13 , r10 
+    mov r10 , r13 
+    mov DWORD[rbp - 12] , esi 
+    mov QWORD[rbp - 20] , rdi 
+    mov QWORD[rbp - 28] , r8 
+    mov QWORD[rbp - 36] , r9 
+    mov QWORD[rbp - 44] , r10 
+    mov QWORD[rbp - 52] , r11 
+    mov QWORD[rbp - 60] , r12 
+    mov QWORD[rbp - 68] , r13 
+    mov QWORD[rbp - 76] , r14 
+    mov QWORD[rbp - 84] , r15 
+    mov rsi , QWORD[rbp - 84] 
+    mov rdi , QWORD[rbp - 76] 
+    mov r8 , QWORD[rbp - 60] 
+    mov r9 , QWORD[rbp - 52] 
+    mov r10 , QWORD[rbp - 36] 
+    mov r11 , QWORD[rbp - 44] 
+    sub rsp , 84 
+    call f.syscall 
+    add rsp , 84 
+    mov r15 , QWORD[rbp - 84] 
+    mov r14 , QWORD[rbp - 76] 
+    mov r13 , QWORD[rbp - 68] 
+    mov r12 , QWORD[rbp - 60] 
+    mov r11 , QWORD[rbp - 52] 
+    mov r10 , QWORD[rbp - 44] 
+    mov r9 , QWORD[rbp - 36] 
+    mov r8 , QWORD[rbp - 28] 
+    mov rdi , QWORD[rbp - 20] 
+    mov esi , DWORD[rbp - 12] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.pause:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 34 
+    mov r14 , 0 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , r10 
+    mov QWORD[rbp - 24] , r11 
+    mov QWORD[rbp - 32] , r12 
+    mov QWORD[rbp - 40] , r13 
+    mov QWORD[rbp - 48] , r14 
+    mov QWORD[rbp - 56] , r15 
+    mov rsi , QWORD[rbp - 56] 
+    mov rdi , QWORD[rbp - 48] 
+    mov r8 , QWORD[rbp - 40] 
+    mov r9 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov r11 , QWORD[rbp - 16] 
+    sub rsp , 56 
+    call f.syscall 
+    add rsp , 56 
+    mov r15 , QWORD[rbp - 56] 
+    mov r14 , QWORD[rbp - 48] 
+    mov r13 , QWORD[rbp - 40] 
+    mov r12 , QWORD[rbp - 32] 
+    mov r11 , QWORD[rbp - 24] 
+    mov r10 , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.nanosleep:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 35 
+    mov r14 , rsi 
+    mov r13 , r14 
+    mov r14 , rdi 
+    mov r12 , r14 
+    mov r14 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r10 
+    mov QWORD[rbp - 40] , r11 
+    mov QWORD[rbp - 48] , r12 
+    mov QWORD[rbp - 56] , r13 
+    mov QWORD[rbp - 64] , r14 
+    mov QWORD[rbp - 72] , r15 
+    mov rsi , QWORD[rbp - 72] 
+    mov rdi , QWORD[rbp - 56] 
+    mov r8 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 64] 
+    mov r10 , QWORD[rbp - 40] 
+    mov r11 , QWORD[rbp - 32] 
+    sub rsp , 72 
+    call f.syscall 
+    add rsp , 72 
+    mov r15 , QWORD[rbp - 72] 
+    mov r14 , QWORD[rbp - 64] 
+    mov r13 , QWORD[rbp - 56] 
+    mov r12 , QWORD[rbp - 48] 
+    mov r11 , QWORD[rbp - 40] 
+    mov r10 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.alarm:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 37 
+    mov r14 , rsi 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , r10 
+    mov QWORD[rbp - 32] , r11 
+    mov QWORD[rbp - 40] , r12 
+    mov QWORD[rbp - 48] , r13 
+    mov QWORD[rbp - 56] , r14 
+    mov QWORD[rbp - 64] , r15 
+    mov rsi , QWORD[rbp - 64] 
+    mov rdi , QWORD[rbp - 56] 
+    mov r8 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 40] 
+    mov r10 , QWORD[rbp - 32] 
+    mov r11 , QWORD[rbp - 24] 
+    sub rsp , 64 
+    call f.syscall 
+    add rsp , 64 
+    mov r15 , QWORD[rbp - 64] 
+    mov r14 , QWORD[rbp - 56] 
+    mov r13 , QWORD[rbp - 48] 
+    mov r12 , QWORD[rbp - 40] 
+    mov r11 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.getpid:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 39 
+    mov r14 , 0 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , r10 
+    mov QWORD[rbp - 24] , r11 
+    mov QWORD[rbp - 32] , r12 
+    mov QWORD[rbp - 40] , r13 
+    mov QWORD[rbp - 48] , r14 
+    mov QWORD[rbp - 56] , r15 
+    mov rsi , QWORD[rbp - 56] 
+    mov rdi , QWORD[rbp - 48] 
+    mov r8 , QWORD[rbp - 40] 
+    mov r9 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov r11 , QWORD[rbp - 16] 
+    sub rsp , 56 
+    call f.syscall 
+    add rsp , 56 
+    mov r15 , QWORD[rbp - 56] 
+    mov r14 , QWORD[rbp - 48] 
+    mov r13 , QWORD[rbp - 40] 
+    mov r12 , QWORD[rbp - 32] 
+    mov r11 , QWORD[rbp - 24] 
+    mov r10 , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.clone:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 56 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r8 
+    mov r11 , r12 
+    mov r12 , r9 
+    mov r9 , r12 
+    mov r12 , r10 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r8 
+    mov QWORD[rbp - 40] , r9 
+    mov QWORD[rbp - 48] , r10 
+    mov QWORD[rbp - 56] , r11 
+    mov QWORD[rbp - 64] , r12 
+    mov QWORD[rbp - 72] , r13 
+    mov QWORD[rbp - 80] , r14 
+    mov QWORD[rbp - 88] , r15 
+    mov rsi , QWORD[rbp - 88] 
+    mov rdi , QWORD[rbp - 80] 
+    mov r8 , QWORD[rbp - 72] 
+    mov r9 , QWORD[rbp - 56] 
+    mov r10 , QWORD[rbp - 40] 
+    mov r11 , QWORD[rbp - 64] 
+    sub rsp , 88 
+    call f.syscall 
+    add rsp , 88 
+    mov r15 , QWORD[rbp - 88] 
+    mov r14 , QWORD[rbp - 80] 
+    mov r13 , QWORD[rbp - 72] 
+    mov r12 , QWORD[rbp - 64] 
+    mov r11 , QWORD[rbp - 56] 
+    mov r10 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.fork:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 57 
+    mov r14 , 0 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , r10 
+    mov QWORD[rbp - 24] , r11 
+    mov QWORD[rbp - 32] , r12 
+    mov QWORD[rbp - 40] , r13 
+    mov QWORD[rbp - 48] , r14 
+    mov QWORD[rbp - 56] , r15 
+    mov rsi , QWORD[rbp - 56] 
+    mov rdi , QWORD[rbp - 48] 
+    mov r8 , QWORD[rbp - 40] 
+    mov r9 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov r11 , QWORD[rbp - 16] 
+    sub rsp , 56 
+    call f.syscall 
+    add rsp , 56 
+    mov r15 , QWORD[rbp - 56] 
+    mov r14 , QWORD[rbp - 48] 
+    mov r13 , QWORD[rbp - 40] 
+    mov r12 , QWORD[rbp - 32] 
+    mov r11 , QWORD[rbp - 24] 
+    mov r10 , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.vfork:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 58 
+    mov r14 , 0 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , r10 
+    mov QWORD[rbp - 24] , r11 
+    mov QWORD[rbp - 32] , r12 
+    mov QWORD[rbp - 40] , r13 
+    mov QWORD[rbp - 48] , r14 
+    mov QWORD[rbp - 56] , r15 
+    mov rsi , QWORD[rbp - 56] 
+    mov rdi , QWORD[rbp - 48] 
+    mov r8 , QWORD[rbp - 40] 
+    mov r9 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov r11 , QWORD[rbp - 16] 
+    sub rsp , 56 
+    call f.syscall 
+    add rsp , 56 
+    mov r15 , QWORD[rbp - 56] 
+    mov r14 , QWORD[rbp - 48] 
+    mov r13 , QWORD[rbp - 40] 
+    mov r12 , QWORD[rbp - 32] 
+    mov r11 , QWORD[rbp - 24] 
+    mov r10 , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.execve:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 59 
+    mov r14 , rsi 
+    mov r13 , r14 
+    mov r14 , rdi 
+    mov r12 , r14 
+    mov r14 , r8 
+    mov r11 , r14 
+    mov r14 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r8 
+    mov QWORD[rbp - 40] , r10 
+    mov QWORD[rbp - 48] , r11 
+    mov QWORD[rbp - 56] , r12 
+    mov QWORD[rbp - 64] , r13 
+    mov QWORD[rbp - 72] , r14 
+    mov QWORD[rbp - 80] , r15 
+    mov rsi , QWORD[rbp - 80] 
+    mov rdi , QWORD[rbp - 64] 
+    mov r8 , QWORD[rbp - 56] 
+    mov r9 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 72] 
+    mov r11 , QWORD[rbp - 40] 
+    sub rsp , 80 
+    call f.syscall 
+    add rsp , 80 
+    mov r15 , QWORD[rbp - 80] 
+    mov r14 , QWORD[rbp - 72] 
+    mov r13 , QWORD[rbp - 64] 
+    mov r12 , QWORD[rbp - 56] 
+    mov r11 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.exit:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 60 
+    mov r14 , rsi 
+    mov r13 , 0 
+    mov r12 , 0 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , r10 
+    mov QWORD[rbp - 32] , r11 
+    mov QWORD[rbp - 40] , r12 
+    mov QWORD[rbp - 48] , r13 
+    mov QWORD[rbp - 56] , r14 
+    mov QWORD[rbp - 64] , r15 
+    mov rsi , QWORD[rbp - 64] 
+    mov rdi , QWORD[rbp - 56] 
+    mov r8 , QWORD[rbp - 48] 
+    mov r9 , QWORD[rbp - 40] 
+    mov r10 , QWORD[rbp - 32] 
+    mov r11 , QWORD[rbp - 24] 
+    sub rsp , 64 
+    call f.syscall 
+    add rsp , 64 
+    mov r15 , QWORD[rbp - 64] 
+    mov r14 , QWORD[rbp - 56] 
+    mov r13 , QWORD[rbp - 48] 
+    mov r12 , QWORD[rbp - 40] 
+    mov r11 , QWORD[rbp - 32] 
+    mov r10 , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.wait4:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 61 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r13 
+    mov r13 , r8 
+    mov r11 , r9 
+    mov r10 , r11 
+    mov r11 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov DWORD[rbp - 28] , r8d 
+    mov QWORD[rbp - 36] , r9 
+    mov QWORD[rbp - 44] , r10 
+    mov QWORD[rbp - 52] , r11 
+    mov QWORD[rbp - 60] , r12 
+    mov QWORD[rbp - 68] , r13 
+    mov QWORD[rbp - 76] , r14 
+    mov QWORD[rbp - 84] , r15 
+    mov rsi , QWORD[rbp - 84] 
+    mov rdi , QWORD[rbp - 76] 
+    mov r8 , QWORD[rbp - 60] 
+    mov r9 , QWORD[rbp - 68] 
+    mov r10 , QWORD[rbp - 44] 
+    mov r11 , QWORD[rbp - 52] 
+    sub rsp , 84 
+    call f.syscall 
+    add rsp , 84 
+    mov r15 , QWORD[rbp - 84] 
+    mov r14 , QWORD[rbp - 76] 
+    mov r13 , QWORD[rbp - 68] 
+    mov r12 , QWORD[rbp - 60] 
+    mov r11 , QWORD[rbp - 52] 
+    mov r10 , QWORD[rbp - 44] 
+    mov r9 , QWORD[rbp - 36] 
+    mov r8d , DWORD[rbp - 28] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
+    pop rbp 
+    ret 
+
+f.fcntl:
+    push rbp 
+    mov rbp , rsp 
+    mov r15 , 72 
+    mov r14 , rsi 
+    mov r13 , rdi 
+    mov r12 , r8 
+    mov r11 , 0 
+    mov r10 , 0 
+    mov QWORD[rbp - 16] , rsi 
+    mov QWORD[rbp - 24] , rdi 
+    mov QWORD[rbp - 32] , r8 
+    mov QWORD[rbp - 40] , r10 
+    mov QWORD[rbp - 48] , r11 
+    mov QWORD[rbp - 56] , r12 
+    mov QWORD[rbp - 64] , r13 
+    mov QWORD[rbp - 72] , r14 
+    mov QWORD[rbp - 80] , r15 
+    mov rsi , QWORD[rbp - 80] 
+    mov rdi , QWORD[rbp - 72] 
+    mov r8 , QWORD[rbp - 64] 
+    mov r9 , QWORD[rbp - 56] 
+    mov r10 , QWORD[rbp - 48] 
+    mov r11 , QWORD[rbp - 40] 
+    sub rsp , 80 
+    call f.syscall 
+    add rsp , 80 
+    mov r15 , QWORD[rbp - 80] 
+    mov r14 , QWORD[rbp - 72] 
+    mov r13 , QWORD[rbp - 64] 
+    mov r12 , QWORD[rbp - 56] 
+    mov r11 , QWORD[rbp - 48] 
+    mov r10 , QWORD[rbp - 40] 
+    mov r8 , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov rsi , QWORD[rbp - 16] 
+    sub rsp , 0 
+    add rsp , 0 
     pop rbp 
     ret 
 
 f.main:
     push rbp 
     mov rbp , rsp 
-    mov r15 , 0x1 
-    mov r14 , 0x2 
-    mov r13 , 0x3 
-    mov r12 , 0x4 
-    mov r11d , 0x5 
-    mov r10d , 0x6 
-    mov r9w , 0x7 
-    mov r8w , 0x8 
-    mov di , 0x9 
-    mov si , 0xA 
-    sub rsp , 0x30 
-    push si 
-    push di 
-    push r8w 
-    push r9w 
-    push r10 
-    push r11 
-    push r12 
-    push r13 
-    push r14 
-    push r15 
-    mov rsi , QWORD[rbp - 136] 
-    mov rdi , QWORD[rbp - 128] 
-    mov r8 , QWORD[rbp - 120] 
-    mov r9 , QWORD[rbp - 112] 
-    mov r10d , DWORD[rbp - 104] 
-    mov eax , DWORD[rbp - 140] 
-    mov DWORD[rbp - 140] , eax 
-    mov ax , WORD[rbp - 142] 
-    mov WORD[rbp - 142] , ax 
-    mov ax , WORD[rbp - 144] 
-    mov WORD[rbp - 144] , ax 
-    mov ax , WORD[rbp - 146] 
-    mov WORD[rbp - 146] , ax 
-    mov ax , WORD[rbp - 148] 
-    mov WORD[rbp - 148] , ax 
-    call f.newh 
-    mov ax , WORD[rbp - 88] 
-    mov ax , WORD[rbp - 138] 
-    mov ax , WORD[rbp - 86] 
-    mov ax , WORD[rbp - 140] 
-    mov ax , WORD[rbp - 84] 
-    mov ax , WORD[rbp - 142] 
-    mov ax , WORD[rbp - 82] 
-    mov ax , WORD[rbp - 144] 
-    mov eax , DWORD[rbp - 80] 
-    mov eax , DWORD[rbp - 148] 
-    mov eax , DWORD[rbp - 76] 
-    mov eax , DWORD[rbp - 152] 
-    mov rax , QWORD[rbp - 72] 
-    mov rax , QWORD[rbp - 160] 
-    mov rax , QWORD[rbp - 64] 
-    mov rax , QWORD[rbp - 168] 
-    mov QWORD[rbp - 56] , rcx 
-    mov rcx , rbx 
-    add rsp , 0xA8 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 136] , rax 
-    mov rax , QWORD[rbp - 136] 
-    mov QWORD[rbp - 128] , rax 
-    add QWORD[rbp - 128] , 0x0 
-    mov rdx , QWORD[rbp - 128] 
-    mov QWORD[rdx] , rcx 
-    mov rax , QWORD[rbp - 136] 
-    mov QWORD[rbp - 128] , rax 
-    add QWORD[rbp - 128] , 0x8 
-    mov rdx , QWORD[rbp - 128] 
-    mov rax , QWORD[rbp - 56] 
-    mov QWORD[rdx] , rax 
-    mov rax , QWORD[rbp - 136] 
-    mov QWORD[rbp - 56] , rax 
-    add QWORD[rbp - 56] , 0x10 
-    mov rdx , QWORD[rbp - 56] 
-    mov rax , QWORD[rbp - 64] 
-    mov QWORD[rdx] , rax 
-    mov rax , QWORD[rbp - 136] 
-    mov QWORD[rbp - 168] , rax 
-    add QWORD[rbp - 168] , 0x18 
-    mov rdx , QWORD[rbp - 168] 
-    mov rax , QWORD[rbp - 72] 
-    mov QWORD[rdx] , rax 
-    mov eax , DWORD[rbp - 136] 
-    mov DWORD[rbp - 164] , eax 
-    add DWORD[rbp - 164] , 0x20 
-    mov rdx , QWORD[rbp - 164] 
-    mov eax , DWORD[rbp - 76] 
-    mov DWORD[rdx] , eax 
-    mov eax , DWORD[rbp - 136] 
-    mov DWORD[rbp - 164] , eax 
-    add DWORD[rbp - 164] , 0x24 
-    mov rdx , QWORD[rbp - 164] 
-    mov eax , DWORD[rbp - 80] 
-    mov DWORD[rdx] , eax 
-    mov ax , WORD[rbp - 136] 
-    mov WORD[rbp - 162] , ax 
-    add WORD[rbp - 162] , 0x28 
-    mov rdx , QWORD[rbp - 162] 
-    mov ax , WORD[rbp - 82] 
-    mov WORD[rdx] , ax 
-    mov ax , WORD[rbp - 136] 
-    mov WORD[rbp - 162] , ax 
-    add WORD[rbp - 162] , 0x2A 
-    mov rdx , QWORD[rbp - 162] 
-    mov ax , WORD[rbp - 84] 
-    mov WORD[rdx] , ax 
-    mov ax , WORD[rbp - 136] 
-    mov WORD[rbp - 162] , ax 
-    add WORD[rbp - 162] , 0x2C 
-    mov rdx , QWORD[rbp - 162] 
-    mov ax , WORD[rbp - 86] 
-    mov WORD[rdx] , ax 
-    mov ax , WORD[rbp - 136] 
-    mov WORD[rbp - 162] , ax 
-    add WORD[rbp - 162] , 0x2E 
-    mov rdx , QWORD[rbp - 162] 
-    mov ax , WORD[rbp - 88] 
-    mov WORD[rdx] , ax 
-    mov QWORD[rbp - 168] , 0x1 
-    mov QWORD[rbp - 160] , 0x2 
-    mov QWORD[rbp - 72] , 0x3 
-    mov QWORD[rbp - 64] , 0x4 
-    mov DWORD[rbp - 152] , 0x5 
-    mov DWORD[rbp - 148] , 0x6 
-    mov WORD[rbp - 144] , 0x7 
-    mov WORD[rbp - 142] , 0x8 
-    mov WORD[rbp - 140] , 0x9 
-    mov WORD[rbp - 138] , 0xA 
-    sub rsp , 0xD8 
-    mov rsi , QWORD[rbp - 168] 
-    mov rdi , QWORD[rbp - 160] 
-    mov r8 , QWORD[rbp - 72] 
-    mov r9 , QWORD[rbp - 64] 
-    mov r10d , DWORD[rbp - 152] 
-    mov eax , DWORD[rbp - 252] 
-    mov DWORD[rbp - 252] , eax 
-    mov ax , WORD[rbp - 254] 
-    mov WORD[rbp - 254] , ax 
-    mov ax , WORD[rbp - 256] 
-    mov WORD[rbp - 256] , ax 
-    mov ax , WORD[rbp - 258] 
-    mov WORD[rbp - 258] , ax 
-    mov ax , WORD[rbp - 260] 
-    mov WORD[rbp - 260] , ax 
-    call f.newh 
-    mov ax , WORD[rbp - 248] 
-    mov ax , WORD[rbp - 250] 
-    mov ax , WORD[rbp - 246] 
-    mov ax , WORD[rbp - 252] 
-    mov ax , WORD[rbp - 244] 
-    mov ax , WORD[rbp - 254] 
-    mov ax , WORD[rbp - 242] 
-    mov ax , WORD[rbp - 256] 
-    mov eax , DWORD[rbp - 240] 
-    mov eax , DWORD[rbp - 260] 
-    mov eax , DWORD[rbp - 236] 
-    mov eax , DWORD[rbp - 264] 
-    mov rax , QWORD[rbp - 232] 
-    mov rax , QWORD[rbp - 272] 
-    mov rax , QWORD[rbp - 224] 
-    mov rax , QWORD[rbp - 280] 
-    mov QWORD[rbp - 136] , rcx 
-    mov QWORD[rbp - 56] , rbx 
-    add rsp , 0x118 
-    lea rax , BYTE[rbp - 216] 
-    mov QWORD[rbp - 168] , rax 
-    mov rax , QWORD[rbp - 168] 
-    mov QWORD[rbp - 160] , rax 
-    add QWORD[rbp - 160] , 0x0 
-    mov rdx , QWORD[rbp - 160] 
-    mov rax , QWORD[rbp - 56] 
-    mov QWORD[rdx] , rax 
-    mov rax , QWORD[rbp - 168] 
-    mov QWORD[rbp - 160] , rax 
-    add QWORD[rbp - 160] , 0x8 
-    mov rdx , QWORD[rbp - 160] 
-    mov rax , QWORD[rbp - 136] 
-    mov QWORD[rdx] , rax 
-    mov rax , QWORD[rbp - 168] 
-    mov QWORD[rbp - 160] , rax 
-    add QWORD[rbp - 160] , 0x10 
-    mov rdx , QWORD[rbp - 160] 
-    mov rax , QWORD[rbp - 224] 
-    mov QWORD[rdx] , rax 
-    mov rax , QWORD[rbp - 168] 
-    mov QWORD[rbp - 280] , rax 
-    add QWORD[rbp - 280] , 0x18 
-    mov rdx , QWORD[rbp - 280] 
-    mov rax , QWORD[rbp - 232] 
-    mov QWORD[rdx] , rax 
-    mov eax , DWORD[rbp - 168] 
-    mov DWORD[rbp - 276] , eax 
-    add DWORD[rbp - 276] , 0x20 
-    mov rdx , QWORD[rbp - 276] 
-    mov eax , DWORD[rbp - 236] 
-    mov DWORD[rdx] , eax 
-    mov eax , DWORD[rbp - 168] 
-    mov DWORD[rbp - 276] , eax 
-    add DWORD[rbp - 276] , 0x24 
-    mov rdx , QWORD[rbp - 276] 
-    mov eax , DWORD[rbp - 240] 
-    mov DWORD[rdx] , eax 
-    mov ax , WORD[rbp - 168] 
-    mov WORD[rbp - 274] , ax 
-    add WORD[rbp - 274] , 0x28 
-    mov rdx , QWORD[rbp - 274] 
-    mov ax , WORD[rbp - 242] 
-    mov WORD[rdx] , ax 
-    mov ax , WORD[rbp - 168] 
-    mov WORD[rbp - 274] , ax 
-    add WORD[rbp - 274] , 0x2A 
-    mov rdx , QWORD[rbp - 274] 
-    mov ax , WORD[rbp - 244] 
-    mov WORD[rdx] , ax 
-    mov ax , WORD[rbp - 168] 
-    mov WORD[rbp - 274] , ax 
-    add WORD[rbp - 274] , 0x2C 
-    mov rdx , QWORD[rbp - 274] 
-    mov ax , WORD[rbp - 246] 
-    mov WORD[rdx] , ax 
-    mov ax , WORD[rbp - 168] 
-    mov WORD[rbp - 274] , ax 
-    add WORD[rbp - 274] , 0x2E 
-    mov rdx , QWORD[rbp - 274] 
-    mov ax , WORD[rbp - 248] 
-    mov WORD[rdx] , ax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 280] , rax 
-    mov rax , QWORD[rbp - 280] 
-    mov QWORD[rbp - 272] , rax 
-    add QWORD[rbp - 272] , 0x0 
-    mov rdx , QWORD[rbp - 272] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 232] , rax 
-    mov rax , QWORD[rbp - 280] 
-    mov QWORD[rbp - 272] , rax 
-    add QWORD[rbp - 272] , 0x8 
-    mov rdx , QWORD[rbp - 272] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 224] , rax 
-    mov rax , QWORD[rbp - 280] 
-    mov QWORD[rbp - 272] , rax 
-    add QWORD[rbp - 272] , 0x10 
-    mov rdx , QWORD[rbp - 272] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 168] , rax 
-    mov rax , QWORD[rbp - 280] 
-    mov QWORD[rbp - 272] , rax 
-    add QWORD[rbp - 272] , 0x18 
-    mov rdx , QWORD[rbp - 272] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 160] , rax 
-    mov eax , DWORD[rbp - 280] 
-    mov DWORD[rbp - 268] , eax 
-    add DWORD[rbp - 268] , 0x20 
-    mov rdx , QWORD[rbp - 268] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 264] , eax 
-    mov eax , DWORD[rbp - 280] 
-    mov DWORD[rbp - 268] , eax 
-    add DWORD[rbp - 268] , 0x24 
-    mov rdx , QWORD[rbp - 268] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 260] , eax 
-    mov ax , WORD[rbp - 280] 
-    mov WORD[rbp - 266] , ax 
-    add WORD[rbp - 266] , 0x28 
-    mov rdx , QWORD[rbp - 266] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 256] , ax 
-    mov ax , WORD[rbp - 280] 
-    mov WORD[rbp - 266] , ax 
-    add WORD[rbp - 266] , 0x2A 
-    mov rdx , QWORD[rbp - 266] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 254] , ax 
-    mov ax , WORD[rbp - 280] 
-    mov WORD[rbp - 266] , ax 
-    add WORD[rbp - 266] , 0x2C 
-    mov rdx , QWORD[rbp - 266] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 252] , ax 
-    mov ax , WORD[rbp - 280] 
-    mov WORD[rbp - 266] , ax 
-    add WORD[rbp - 266] , 0x2E 
-    mov rdx , QWORD[rbp - 266] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 274] , ax 
-    lea rax , BYTE[rbp - 216] 
-    mov QWORD[rbp - 272] , rax 
-    mov rax , QWORD[rbp - 272] 
-    mov QWORD[rbp - 72] , rax 
-    add QWORD[rbp - 72] , 0x0 
-    mov rdx , QWORD[rbp - 72] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 64] , rax 
-    mov rax , QWORD[rbp - 272] 
-    mov QWORD[rbp - 72] , rax 
-    add QWORD[rbp - 72] , 0x8 
-    mov rdx , QWORD[rbp - 72] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 56] , rax 
-    mov rax , QWORD[rbp - 272] 
-    mov QWORD[rbp - 72] , rax 
-    add QWORD[rbp - 72] , 0x10 
-    mov rdx , QWORD[rbp - 72] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 136] , rax 
-    mov rax , QWORD[rbp - 272] 
-    mov QWORD[rbp - 72] , rax 
-    add QWORD[rbp - 72] , 0x18 
-    mov rdx , QWORD[rbp - 72] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 128] , rax 
-    mov eax , DWORD[rbp - 272] 
-    mov DWORD[rbp - 240] , eax 
-    add DWORD[rbp - 240] , 0x20 
-    mov rdx , QWORD[rbp - 240] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 236] , eax 
-    mov eax , DWORD[rbp - 272] 
-    mov DWORD[rbp - 240] , eax 
-    add DWORD[rbp - 240] , 0x24 
-    mov rdx , QWORD[rbp - 240] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 152] , eax 
-    mov ax , WORD[rbp - 272] 
-    mov WORD[rbp - 250] , ax 
-    add WORD[rbp - 250] , 0x28 
-    mov rdx , QWORD[rbp - 250] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 248] , ax 
-    mov ax , WORD[rbp - 272] 
-    mov WORD[rbp - 250] , ax 
-    add WORD[rbp - 250] , 0x2A 
-    mov rdx , QWORD[rbp - 250] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 246] , ax 
-    mov ax , WORD[rbp - 272] 
-    mov WORD[rbp - 250] , ax 
-    add WORD[rbp - 250] , 0x2C 
-    mov rdx , QWORD[rbp - 250] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 244] , ax 
-    mov ax , WORD[rbp - 272] 
-    mov WORD[rbp - 250] , ax 
-    add WORD[rbp - 250] , 0x2E 
-    mov rdx , QWORD[rbp - 250] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 266] , ax 
-    sub rsp , 0x148 
-    mov rsi , QWORD[rbp - 232] 
-    mov rdi , QWORD[rbp - 224] 
-    mov r8 , QWORD[rbp - 168] 
-    mov r9 , QWORD[rbp - 160] 
-    mov r10d , DWORD[rbp - 264] 
-    mov eax , DWORD[rbp - 364] 
-    mov DWORD[rbp - 364] , eax 
-    mov ax , WORD[rbp - 366] 
-    mov WORD[rbp - 366] , ax 
-    mov ax , WORD[rbp - 368] 
-    mov WORD[rbp - 368] , ax 
-    mov ax , WORD[rbp - 370] 
-    mov WORD[rbp - 370] , ax 
-    mov ax , WORD[rbp - 372] 
-    mov WORD[rbp - 372] , ax 
-    mov rax , QWORD[rbp - 380] 
-    mov QWORD[rbp - 380] , rax 
-    mov rax , QWORD[rbp - 388] 
-    mov QWORD[rbp - 388] , rax 
-    mov rax , QWORD[rbp - 396] 
-    mov QWORD[rbp - 396] , rax 
-    mov rax , QWORD[rbp - 404] 
-    mov QWORD[rbp - 404] , rax 
-    mov eax , DWORD[rbp - 408] 
-    mov DWORD[rbp - 408] , eax 
-    mov eax , DWORD[rbp - 412] 
-    mov DWORD[rbp - 412] , eax 
-    mov ax , WORD[rbp - 414] 
-    mov WORD[rbp - 414] , ax 
-    mov ax , WORD[rbp - 416] 
-    mov WORD[rbp - 416] , ax 
-    mov ax , WORD[rbp - 418] 
-    mov WORD[rbp - 418] , ax 
-    mov ax , WORD[rbp - 420] 
-    mov WORD[rbp - 420] , ax 
-    call f.addh 
-    mov ax , WORD[rbp - 360] 
-    mov ax , WORD[rbp - 362] 
-    mov ax , WORD[rbp - 358] 
-    mov ax , WORD[rbp - 364] 
-    mov ax , WORD[rbp - 356] 
-    mov ax , WORD[rbp - 366] 
-    mov ax , WORD[rbp - 354] 
-    mov ax , WORD[rbp - 368] 
-    mov eax , DWORD[rbp - 352] 
-    mov eax , DWORD[rbp - 372] 
-    mov eax , DWORD[rbp - 348] 
-    mov eax , DWORD[rbp - 376] 
-    mov rax , QWORD[rbp - 344] 
-    mov rax , QWORD[rbp - 384] 
-    mov rax , QWORD[rbp - 336] 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 120] , rcx 
-    mov QWORD[rbp - 72] , rbx 
-    add rsp , 0x188 
-    lea rax , BYTE[rbp - 328] 
-    mov QWORD[rbp - 280] , rax 
-    mov rax , QWORD[rbp - 280] 
-    mov QWORD[rbp - 272] , rax 
-    add QWORD[rbp - 272] , 0x0 
-    mov rdx , QWORD[rbp - 272] 
-    mov rax , QWORD[rbp - 72] 
-    mov QWORD[rdx] , rax 
-    mov rax , QWORD[rbp - 280] 
-    mov QWORD[rbp - 272] , rax 
-    add QWORD[rbp - 272] , 0x8 
-    mov rdx , QWORD[rbp - 272] 
-    mov rax , QWORD[rbp - 120] 
-    mov QWORD[rdx] , rax 
-    mov rax , QWORD[rbp - 280] 
-    mov QWORD[rbp - 272] , rax 
-    add QWORD[rbp - 272] , 0x10 
-    mov rdx , QWORD[rbp - 272] 
-    mov rax , QWORD[rbp - 336] 
-    mov QWORD[rdx] , rax 
-    mov rax , QWORD[rbp - 280] 
-    mov QWORD[rbp - 392] , rax 
-    add QWORD[rbp - 392] , 0x18 
-    mov rdx , QWORD[rbp - 392] 
-    mov rax , QWORD[rbp - 344] 
-    mov QWORD[rdx] , rax 
-    mov eax , DWORD[rbp - 280] 
-    mov DWORD[rbp - 388] , eax 
-    add DWORD[rbp - 388] , 0x20 
-    mov rdx , QWORD[rbp - 388] 
-    mov eax , DWORD[rbp - 348] 
-    mov DWORD[rdx] , eax 
-    mov eax , DWORD[rbp - 280] 
-    mov DWORD[rbp - 388] , eax 
-    add DWORD[rbp - 388] , 0x24 
-    mov rdx , QWORD[rbp - 388] 
-    mov eax , DWORD[rbp - 352] 
-    mov DWORD[rdx] , eax 
-    mov ax , WORD[rbp - 280] 
-    mov WORD[rbp - 386] , ax 
-    add WORD[rbp - 386] , 0x28 
-    mov rdx , QWORD[rbp - 386] 
-    mov ax , WORD[rbp - 354] 
-    mov WORD[rdx] , ax 
-    mov ax , WORD[rbp - 280] 
-    mov WORD[rbp - 386] , ax 
-    add WORD[rbp - 386] , 0x2A 
-    mov rdx , QWORD[rbp - 386] 
-    mov ax , WORD[rbp - 356] 
-    mov WORD[rdx] , ax 
-    mov ax , WORD[rbp - 280] 
-    mov WORD[rbp - 386] , ax 
-    add WORD[rbp - 386] , 0x2C 
-    mov rdx , QWORD[rbp - 386] 
-    mov ax , WORD[rbp - 358] 
-    mov WORD[rdx] , ax 
-    mov ax , WORD[rbp - 280] 
-    mov WORD[rbp - 386] , ax 
-    add WORD[rbp - 386] , 0x2E 
-    mov rdx , QWORD[rbp - 386] 
-    mov ax , WORD[rbp - 360] 
-    mov WORD[rdx] , ax 
-    lea rax , BYTE[rbp - 48] 
-    mov QWORD[rbp - 392] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 384] , rax 
-    add QWORD[rbp - 384] , 0x0 
-    mov rdx , QWORD[rbp - 384] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 344] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 384] , rax 
-    add QWORD[rbp - 384] , 0x8 
-    mov rdx , QWORD[rbp - 384] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 336] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 384] , rax 
-    add QWORD[rbp - 384] , 0x10 
-    mov rdx , QWORD[rbp - 384] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 280] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 384] , rax 
-    add QWORD[rbp - 384] , 0x18 
-    mov rdx , QWORD[rbp - 384] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 272] , rax 
-    mov eax , DWORD[rbp - 392] 
-    mov DWORD[rbp - 380] , eax 
-    add DWORD[rbp - 380] , 0x20 
-    mov rdx , QWORD[rbp - 380] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 376] , eax 
-    mov eax , DWORD[rbp - 392] 
-    mov DWORD[rbp - 380] , eax 
-    add DWORD[rbp - 380] , 0x24 
-    mov rdx , QWORD[rbp - 380] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 372] , eax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 378] , ax 
-    add WORD[rbp - 378] , 0x28 
-    mov rdx , QWORD[rbp - 378] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 368] , ax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 378] , ax 
-    add WORD[rbp - 378] , 0x2A 
-    mov rdx , QWORD[rbp - 378] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 366] , ax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 378] , ax 
-    add WORD[rbp - 378] , 0x2C 
-    mov rdx , QWORD[rbp - 378] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 364] , ax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 378] , ax 
-    add WORD[rbp - 378] , 0x2E 
-    mov rdx , QWORD[rbp - 378] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 386] , ax 
-    sub rsp , 0x188 
-    mov rsi , QWORD[rbp - 344] 
-    mov rdi , QWORD[rbp - 336] 
-    mov r8 , QWORD[rbp - 280] 
-    mov r9 , QWORD[rbp - 272] 
-    mov r10d , DWORD[rbp - 376] 
-    mov eax , DWORD[rbp - 396] 
-    mov DWORD[rbp - 396] , eax 
-    mov ax , WORD[rbp - 398] 
-    mov WORD[rbp - 398] , ax 
-    mov ax , WORD[rbp - 400] 
-    mov WORD[rbp - 400] , ax 
-    mov ax , WORD[rbp - 402] 
-    mov WORD[rbp - 402] , ax 
-    mov ax , WORD[rbp - 404] 
-    mov WORD[rbp - 404] , ax 
-    call f.foldh 
-    mov QWORD[rbp - 384] , rbx 
-    add rsp , 0x188 
-    lea rax , BYTE[rbp - 216] 
-    mov QWORD[rbp - 392] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 344] , rax 
-    add QWORD[rbp - 344] , 0x0 
-    mov rdx , QWORD[rbp - 344] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 336] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 344] , rax 
-    add QWORD[rbp - 344] , 0x8 
-    mov rdx , QWORD[rbp - 344] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 280] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 344] , rax 
-    add QWORD[rbp - 344] , 0x10 
-    mov rdx , QWORD[rbp - 344] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 272] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 344] , rax 
-    add QWORD[rbp - 344] , 0x18 
-    mov rdx , QWORD[rbp - 344] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 232] , rax 
-    mov eax , DWORD[rbp - 392] 
-    mov DWORD[rbp - 376] , eax 
-    add DWORD[rbp - 376] , 0x20 
-    mov rdx , QWORD[rbp - 376] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 372] , eax 
-    mov eax , DWORD[rbp - 392] 
-    mov DWORD[rbp - 376] , eax 
-    add DWORD[rbp - 376] , 0x24 
-    mov rdx , QWORD[rbp - 376] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 352] , eax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 374] , ax 
-    add WORD[rbp - 374] , 0x28 
-    mov rdx , QWORD[rbp - 374] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 368] , ax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 374] , ax 
-    add WORD[rbp - 374] , 0x2A 
-    mov rdx , QWORD[rbp - 374] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 366] , ax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 374] , ax 
-    add WORD[rbp - 374] , 0x2C 
-    mov rdx , QWORD[rbp - 374] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 364] , ax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 374] , ax 
-    add WORD[rbp - 374] , 0x2E 
-    mov rdx , QWORD[rbp - 374] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 386] , ax 
-    sub rsp , 0x188 
-    mov rsi , QWORD[rbp - 336] 
-    mov rdi , QWORD[rbp - 280] 
-    mov r8 , QWORD[rbp - 272] 
-    mov r9 , QWORD[rbp - 232] 
-    mov r10d , DWORD[rbp - 372] 
-    mov eax , DWORD[rbp - 396] 
-    mov DWORD[rbp - 396] , eax 
-    mov ax , WORD[rbp - 398] 
-    mov WORD[rbp - 398] , ax 
-    mov ax , WORD[rbp - 400] 
-    mov WORD[rbp - 400] , ax 
-    mov ax , WORD[rbp - 402] 
-    mov WORD[rbp - 402] , ax 
-    mov ax , WORD[rbp - 404] 
-    mov WORD[rbp - 404] , ax 
-    call f.foldh 
-    mov QWORD[rbp - 344] , rbx 
-    add rsp , 0x188 
-    lea rax , BYTE[rbp - 328] 
-    mov QWORD[rbp - 392] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 336] , rax 
-    add QWORD[rbp - 336] , 0x0 
-    mov rdx , QWORD[rbp - 336] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 280] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 336] , rax 
-    add QWORD[rbp - 336] , 0x8 
-    mov rdx , QWORD[rbp - 336] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 272] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 336] , rax 
-    add QWORD[rbp - 336] , 0x10 
-    mov rdx , QWORD[rbp - 336] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 232] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 336] , rax 
-    add QWORD[rbp - 336] , 0x18 
-    mov rdx , QWORD[rbp - 336] 
-    mov rax , QWORD[rdx] 
-    mov QWORD[rbp - 224] , rax 
-    mov eax , DWORD[rbp - 392] 
-    mov DWORD[rbp - 376] , eax 
-    add DWORD[rbp - 376] , 0x20 
-    mov rdx , QWORD[rbp - 376] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 372] , eax 
-    mov eax , DWORD[rbp - 392] 
-    mov DWORD[rbp - 376] , eax 
-    add DWORD[rbp - 376] , 0x24 
-    mov rdx , QWORD[rbp - 376] 
-    mov eax , DWORD[rdx] 
-    mov DWORD[rbp - 352] , eax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 374] , ax 
-    add WORD[rbp - 374] , 0x28 
-    mov rdx , QWORD[rbp - 374] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 368] , ax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 374] , ax 
-    add WORD[rbp - 374] , 0x2A 
-    mov rdx , QWORD[rbp - 374] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 366] , ax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 374] , ax 
-    add WORD[rbp - 374] , 0x2C 
-    mov rdx , QWORD[rbp - 374] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 364] , ax 
-    mov ax , WORD[rbp - 392] 
-    mov WORD[rbp - 374] , ax 
-    add WORD[rbp - 374] , 0x2E 
-    mov rdx , QWORD[rbp - 374] 
-    mov ax , WORD[rdx] 
-    mov WORD[rbp - 386] , ax 
-    sub rsp , 0x188 
-    mov rsi , QWORD[rbp - 280] 
-    mov rdi , QWORD[rbp - 272] 
-    mov r8 , QWORD[rbp - 232] 
-    mov r9 , QWORD[rbp - 224] 
-    mov r10d , DWORD[rbp - 372] 
-    mov eax , DWORD[rbp - 396] 
-    mov DWORD[rbp - 396] , eax 
-    mov ax , WORD[rbp - 398] 
-    mov WORD[rbp - 398] , ax 
-    mov ax , WORD[rbp - 400] 
-    mov WORD[rbp - 400] , ax 
-    mov ax , WORD[rbp - 402] 
-    mov WORD[rbp - 402] , ax 
-    mov ax , WORD[rbp - 404] 
-    mov WORD[rbp - 404] , ax 
-    call f.foldh 
-    mov QWORD[rbp - 336] , rbx 
-    add rsp , 0x188 
-    mov QWORD[rbp - 392] , 0x1 
-    mov QWORD[rbp - 280] , 0x2 
-    mov QWORD[rbp - 272] , 0x3 
-    mov QWORD[rbp - 232] , 0x4 
-    mov DWORD[rbp - 376] , 0x5 
-    mov DWORD[rbp - 372] , 0x6 
-    mov WORD[rbp - 368] , 0x7 
-    mov WORD[rbp - 366] , 0x8 
-    mov WORD[rbp - 364] , 0x9 
-    mov WORD[rbp - 362] , 0xA 
-    sub rsp , 0x188 
-    mov rsi , QWORD[rbp - 392] 
-    mov rdi , QWORD[rbp - 280] 
-    mov r8 , QWORD[rbp - 272] 
-    mov r9 , QWORD[rbp - 232] 
-    mov r10d , DWORD[rbp - 376] 
-    mov eax , DWORD[rbp - 396] 
-    mov DWORD[rbp - 396] , eax 
-    mov ax , WORD[rbp - 398] 
-    mov WORD[rbp - 398] , ax 
-    mov ax , WORD[rbp - 400] 
-    mov WORD[rbp - 400] , ax 
-    mov ax , WORD[rbp - 402] 
-    mov WORD[rbp - 402] , ax 
-    mov ax , WORD[rbp - 404] 
-    mov WORD[rbp - 404] , ax 
-    call f.add10 
-    mov QWORD[rbp - 224] , rbx 
-    add rsp , 0x188 
-    mov QWORD[rbp - 392] , 0x1 
-    mov QWORD[rbp - 280] , 0x2 
-    mov QWORD[rbp - 272] , 0x3 
-    mov QWORD[rbp - 232] , 0x4 
-    mov DWORD[rbp - 376] , 0x5 
-    mov DWORD[rbp - 372] , 0x6 
-    mov WORD[rbp - 368] , 0x7 
-    mov WORD[rbp - 366] , 0x8 
-    mov WORD[rbp - 364] , 0x9 
-    mov WORD[rbp - 362] , 0xA 
-    sub rsp , 0x188 
-    mov rsi , QWORD[rbp - 392] 
-    mov rdi , QWORD[rbp - 280] 
-    mov r8 , QWORD[rbp - 272] 
-    mov r9 , QWORD[rbp - 232] 
-    mov r10d , DWORD[rbp - 376] 
-    mov eax , DWORD[rbp - 396] 
-    mov DWORD[rbp - 396] , eax 
-    mov ax , WORD[rbp - 398] 
-    mov WORD[rbp - 398] , ax 
-    mov ax , WORD[rbp - 400] 
-    mov WORD[rbp - 400] , ax 
-    mov ax , WORD[rbp - 402] 
-    mov WORD[rbp - 402] , ax 
-    mov ax , WORD[rbp - 404] 
-    mov WORD[rbp - 404] , ax 
-    call f.add10 
-    mov QWORD[rbp - 168] , rbx 
-    add rsp , 0x188 
-    mov rax , QWORD[rbp - 384] 
-    mov QWORD[rbp - 392] , rax 
-    mov rax , QWORD[rbp - 344] 
-    add QWORD[rbp - 392] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 384] , rax 
-    mov rax , QWORD[rbp - 336] 
-    add QWORD[rbp - 384] , rax 
-    mov rax , QWORD[rbp - 384] 
-    mov QWORD[rbp - 392] , rax 
-    mov rax , QWORD[rbp - 224] 
-    add QWORD[rbp - 392] , rax 
-    mov rax , QWORD[rbp - 392] 
-    mov QWORD[rbp - 384] , rax 
-    mov rax , QWORD[rbp - 168] 
-    add QWORD[rbp - 384] , rax 
-    mov rax , QWORD[rbp - 384] 
-    mov QWORD[rbp - 392] , rax 
-    mov rbx , QWORD[rbp - 392] 
+    mov r15 , 1 
+    mov r14 , cstr.0 
+    mov r13 , 12 
+    mov QWORD[rbp - 16] , r13 
+    mov QWORD[rbp - 24] , r14 
+    mov QWORD[rbp - 32] , r15 
+    mov rsi , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov r8 , QWORD[rbp - 16] 
+    sub rsp , 32 
+    call f.write 
+    add rsp , 32 
+    mov r15 , QWORD[rbp - 32] 
+    mov r14 , QWORD[rbp - 24] 
+    mov r13 , QWORD[rbp - 16] 
+    mov r15 , 1 
+    mov r14 , cstr.1 
+    mov r13 , 17 
+    mov QWORD[rbp - 16] , r13 
+    mov QWORD[rbp - 24] , r14 
+    mov QWORD[rbp - 32] , r15 
+    mov rsi , QWORD[rbp - 32] 
+    mov rdi , QWORD[rbp - 24] 
+    mov r8 , QWORD[rbp - 16] 
+    sub rsp , 32 
+    call f.write 
+    add rsp , 32 
+    mov r15 , QWORD[rbp - 32] 
+    mov r14 , QWORD[rbp - 24] 
+    mov r13 , QWORD[rbp - 16] 
+    mov QWORD[rbp - 16] , cstr.2 
+    mov r15 , 0 
+    mov r14 , QWORD[rbp - 16] 
+    mov r13 , r14 
+    mov r14 , 12 
+    mov QWORD[rbp - 24] , r13 
+    mov QWORD[rbp - 32] , r14 
+    mov QWORD[rbp - 40] , r15 
+    mov rsi , QWORD[rbp - 40] 
+    mov rdi , QWORD[rbp - 24] 
+    mov r8 , QWORD[rbp - 32] 
+    sub rsp , 40 
+    call f.read 
+    add rsp , 40 
+    mov r15 , QWORD[rbp - 40] 
+    mov r14 , QWORD[rbp - 32] 
+    mov r13 , QWORD[rbp - 24] 
+    mov r15 , 1 
+    mov r14 , cstr.3 
+    mov r13 , 8 
+    mov QWORD[rbp - 24] , r13 
+    mov QWORD[rbp - 32] , r14 
+    mov QWORD[rbp - 40] , r15 
+    mov rsi , QWORD[rbp - 40] 
+    mov rdi , QWORD[rbp - 32] 
+    mov r8 , QWORD[rbp - 24] 
+    sub rsp , 40 
+    call f.write 
+    add rsp , 40 
+    mov r15 , QWORD[rbp - 40] 
+    mov r14 , QWORD[rbp - 32] 
+    mov r13 , QWORD[rbp - 24] 
+    mov r15 , 1 
+    mov r14 , QWORD[rbp - 16] 
+    mov r13 , r14 
+    mov r14 , 12 
+    mov QWORD[rbp - 24] , r13 
+    mov QWORD[rbp - 32] , r14 
+    mov QWORD[rbp - 40] , r15 
+    mov rsi , QWORD[rbp - 40] 
+    mov rdi , QWORD[rbp - 24] 
+    mov r8 , QWORD[rbp - 32] 
+    sub rsp , 40 
+    call f.write 
+    add rsp , 40 
+    mov r15 , QWORD[rbp - 40] 
+    mov r14 , QWORD[rbp - 32] 
+    mov r13 , QWORD[rbp - 24] 
+    mov r15 , 1 
+    mov r14 , cstr.4 
+    mov r13 , 12 
+    mov QWORD[rbp - 24] , r13 
+    mov QWORD[rbp - 32] , r14 
+    mov QWORD[rbp - 40] , r15 
+    mov rsi , QWORD[rbp - 40] 
+    mov rdi , QWORD[rbp - 32] 
+    mov r8 , QWORD[rbp - 24] 
+    sub rsp , 40 
+    call f.write 
+    add rsp , 40 
+    mov r15 , QWORD[rbp - 40] 
+    mov r14 , QWORD[rbp - 32] 
+    mov r13 , QWORD[rbp - 24] 
+    mov r15 , 0 
+    sub rsp , 24 
+    mov QWORD[rsp + 0] , r15 
+    mov rbx , QWORD[rsp + 0] 
+    add rsp , 24 
     pop rbp 
     ret 
+    sub rsp , 16 
+    add rsp , 16 
     pop rbp 
     ret 
 
